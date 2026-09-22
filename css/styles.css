@@ -86,3 +86,17 @@ footer p {
   color: white;
   border-radius: 8px;
 }
+
+.resource-card {
+  background: white;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.resource-card:hover {
+  transform: scale(1.05);
+}
