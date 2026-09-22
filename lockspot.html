@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lock Spot</title>        
+    <link rel="stylesheet"  href="./css/styles.css" type="text/css">
+
+</head>
+<body>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="">Work Station</a>
+    <a href=""><img
+            src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+    <a href="lockspot.html">Lock Spot</a>
+    <a href="">Resources</a>
+</nav>
+<div class="lock-spot-container">
+    <center><h2>Lock Spot</h2></center>
+    <textarea class="lock-spot-textarea" id="lock-spot-textarea" placeholder="Type your text here!">
+    </textarea>
+    <div class="lock-spot-controls">
+        <select class="model-selector" id="model-selector">
+            <option value="small_ffn_model">Lock Spot Small FFN Model</option>
+            <option value="small_lr_model">Lock Spot Small LR Model</option>
+        </select>
+        <button class="save-model-btn" onclick="loadModel();">Select Model</button>
+        <button class="conduct-analysis-btn" onclick="analyzeCiphertext();">Conduct Analysis</button>
+    </div>
+</div>
+<div id="resultsBox">
+
+</div>
+<script type="module">
+    import {LockSpotManager} from './js/lockspot/LockSpotManager.js';
+    import { LockSpotFFNModelData } from './js/lockspot/LockSpotFFNModelData.js'; 
+    import { LockSpotLogisticRegressionModelData } from './js/lockspot/LockSpotLogisticRegressionModelData.js';
+    import {LockSpotFeatureUtils} from './js/lockspot/LockSpotFeatureUtils.js';
+
+    let selectedModel = null;
+    let modelLoading = false;
+
+
+    async function loadModel() {
+        const dropdown = document.getElementById("model-selector");
+        const selectedValue = dropdown.value;
+
+        try {
+            selectedModel = null;
+
+            if (selectedValue === "small_ffn_model") {
+                selectedModel = await LockSpotManager.loadModelArchitecture(
+                    "./resources/lock-spot-small-ffn-model.json",
+                    new LockSpotFFNModelData()
+                );
+                alert("You've successfully selected LockSpot's Feed Forward Network model")
+            } else if (selectedValue === "small_lr_model") {
+                selectedModel = await LockSpotManager.loadModelArchitecture(
+                    "./resources/lock-spot-small-logistic-regression-model.json",
+                    new LockSpotLogisticRegressionModelData()
+                );
+                alert("You've successfully selected LockSpot's Logistic Regression Model!")
+            } else {
+                throw new Error("No valid model selected");
+            }
+        } catch (error) {
+            alert("Could not load the selected model.");
+            selectedModel = null;
+        }
+    }
+
+
+    window.loadModel = loadModel;
+
+    async function analyzeCiphertext() {
+        if (modelLoading) {
+            alert("The model is still loading. Please try again shortly.");
+            return;
+        }
+
+        if (!selectedModel) {
+            alert("Please select and load a model first!");
+            return;
+        }
+
+        const textarea = document.getElementById("lock-spot-textarea");
+        const text = textarea?.value ?? "";
+
+        if (text.length < 100) {
+            alert("Ciphertext must be 100 characters or more");
+            return;
+        }
+
+        try {
+            const features = LockSpotFeatureUtils.getFeatures(text);
+
+            const resultsBox = document.getElementById("resultsBox");
+            resultsBox?.replaceChildren();
+
+            LockSpotManager.generateReport(
+                "Cipher Type",
+                selectedModel.cipherTypeModel,
+                features
+            );
+
+            LockSpotManager.generateReport(
+                "Cipher Algorithm",
+                selectedModel.cipherAlgorithmModel,
+                features
+            );
+        } catch (error) {
+            alert("Could not run the selected model.");
+        }
+    }
+
+    window.analyzeCiphertext = analyzeCiphertext;
+</script>
+</body>
+</html>
