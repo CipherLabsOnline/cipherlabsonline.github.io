@@ -31,6 +31,7 @@ footer {
   background-color: #34495e;
   text-align: center;
   padding: 3px;
+  min-height: 5vh;
 }
 
 footer p {
@@ -42,6 +43,7 @@ footer p {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  min-height: 95vh;
 }
 
 .section {
@@ -59,6 +61,7 @@ footer p {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  min-height: 65vh;
 }
 
 .lock-spot-container .lock-spot-textarea {
@@ -91,6 +94,7 @@ footer p {
   border: 1px solid white;
 }
 
+.ciphertextbox-warning-label,
 .characters-typed {
   background-color: #34495e;
   border: 1px solid white;
@@ -99,7 +103,6 @@ footer p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   color: white;
-  
   width: fit-content;
 }
 
@@ -159,4 +162,8 @@ footer p {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   flex-grow: 1;
+}
+
+.results-box {
+  min-height: 25vh;
 }

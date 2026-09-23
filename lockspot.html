@@ -34,11 +34,19 @@
         </select>
         <button class="save-model-btn" onclick="loadModel();">Select Model</button>
         <button class="conduct-analysis-btn" onclick="analyzeCiphertext();">Conduct Analysis</button>
-    </div>    
+    </div>   
+    <br>
+    <div class="ciphertextbox-warning-label">
+        <span>Ciphertext must be 100+ characters in length and contain only digits and uppercase letters; any other symbols will be removed during analysis.</span>
+    </div>  
 </div>
-<div id="resultsBox">
+<div class="results-box" id="resultsBox">
 
 </div>
+<footer>
+    <p>Author: dug22</p>
+    <p>Last Updated: September 2026</p>
+</footer>
 <script type="module">
     import {LockSpotManager} from './js/lockspot/LockSpotManager.js';
     import { LockSpotFFNModelData } from './js/lockspot/LockSpotFFNModelData.js'; 
@@ -92,13 +100,15 @@
         }
 
         const textarea = document.getElementById("lock-spot-textarea");
-        const text = textarea?.value ?? "";
+        let text = textarea?.value ?? "";
 
         if (text.length < 100) {
             alert("Ciphertext must be 100 characters or more");
             return;
         }
 
+        text = text.replaceAll(/[^a-zA-Z0-9]/g, "");
+        textArea.value = text;
         try {
             const features = LockSpotFeatureUtils.getFeatures(text);
 
@@ -127,7 +137,7 @@
     const charCount = document.getElementById("charCount");
     textArea.addEventListener('input', () => {
         charCount.textContent = "Characters Typed: " + textArea.value.length;
-    })
+    });
 </script>
 </body>
 </html>
