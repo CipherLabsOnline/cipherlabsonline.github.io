@@ -91,16 +91,16 @@ footer p {
   border: 1px solid white;
 }
 
-.lock-spot-controls .characters-typed {
-  background-color: #2c3e50;
+.characters-typed {
+  background-color: #34495e;
   border: 1px solid white;
   border-radius: 6px;
   padding: 8px 14px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
-  display: inline-flex;
-  align-items: center;
   color: white;
+  
+  width: fit-content;
 }
 
 .lock-spot-controls h4{

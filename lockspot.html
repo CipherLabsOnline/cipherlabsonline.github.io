@@ -20,19 +20,21 @@
         <h2>&#9432; Lock Spot</h2>        
         <p> Thanks to the power of machine learning, Lock Spot can identify the cipher type, and cipher algorithm from a given snippet of ciphertext.</p>
     </div>
+    <br>
     <textarea class="lock-spot-textarea" id="lock-spot-textarea" placeholder="Type your ciphertext here!"></textarea>
-    <div class="lock-spot-controls">
-        <h4>&#9881; Lock Spot Settings</h2>
     <div class="characters-typed">
         <span id="charCount">Characters Typed: 0</span>
-    </div>
+    </div> 
+    <br>
+    <div class="lock-spot-controls">
+        <h4>&#9881; Lock Spot Settings</h2>
         <select class="model-selector" id="model-selector">
             <option value="small_ffn_model">Lock Spot Small FFN Model</option>
             <option value="small_lr_model">Lock Spot Small LR Model</option>
         </select>
         <button class="save-model-btn" onclick="loadModel();">Select Model</button>
         <button class="conduct-analysis-btn" onclick="analyzeCiphertext();">Conduct Analysis</button>
-    </div>
+    </div>    
 </div>
 <div id="resultsBox">
 
