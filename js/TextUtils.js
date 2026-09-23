@@ -2,11 +2,6 @@ export class TextUtils {
 
     static getFrequencies(text) {
         const frequencies = new Map();
-        
-        if (typeof text !== "string") {
-            text = String(text || "");
-        }
-
         const textLength = text.length;
         if (textLength === 0) {
             return frequencies;
