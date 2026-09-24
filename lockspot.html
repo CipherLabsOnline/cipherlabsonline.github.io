@@ -66,13 +66,13 @@
 
             if (selectedValue === "small_ffn_model") {
                 selectedModel = await LockSpotManager.loadModelArchitecture(
-                    "./resources/lock-spot-small-ffn-model.json",
+                    "./models/lock-spot-small-ffn-model.json",
                     new LockSpotFFNModelData()
                 );
                 alert("You've successfully selected LockSpot's Feed Forward Network model")
             } else if (selectedValue === "small_lr_model") {
                 selectedModel = await LockSpotManager.loadModelArchitecture(
-                    "./resources/lock-spot-small-logistic-regression-model.json",
+                    "./models/lock-spot-small-logistic-regression-model.json",
                     new LockSpotLogisticRegressionModelData()
                 );
                 alert("You've successfully selected LockSpot's Logistic Regression Model!")
