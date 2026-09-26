@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workstation</title>        
+    <link rel="stylesheet"  href="./css/styles.css" type="text/css">
+
+</head>
+<body>
+<nav>
+    <a href="index.html">Home</a>
+    <a href="workstation.html">Work Station</a>
+    <a href=""><img
+            src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+    <a href="lockspot.html">Lock Spot</a>
+    <a href="resources.html">Resources</a>
+</nav>
+<div class="workstation-container">
+        <div class="details-banner">
+            <h1>Select Any Cryptographic Algorithm To Work With!</h1>
+        </div>
+        
+        <input type="text" placeholder="Search Algorithm..." class="search-bar" id="algorithm-search-bar">
+        <main id="algorithm-container">
+            <h1>Classic Ciphers</h1>
+              <div class="algorithm" id="algorithm" algorithm-title="Affine Cipher" algorithm-content="Simple monoalphabetic substitution cipher that converts each letter to a number and applies a linear function.">
+                <h2><img src="./imgs/affine.png" width="32px" height="32px">Affine Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/affine-cipher-article.html', 'Information Behind The Affine Cipher')";>
+                        📜
+                    </button>
+                </h2>
+                <p>Simple monoalphabetic substitution cipher that converts each letter to a number and applies a linear function.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Atbash Cipher" algorithm-content="Simple monoalphabetic substitution cipher where each letter is replaced by its counterpart in the reversed alphabet.">
+                <h2><img src="./imgs/atbash.png" width="32px" height="32px">Atbash Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/atbash-cipher-article.html', 'Information Behind The Atbash Cipher')";>
+                    📜
+                    </button>
+                </h2>
+                <p>Simple monoalphabetic substitution cipher where each letter is replaced by its counterpart in the reversed alphabet.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Caesar Cipher" algorithm-content="Popular monoalphabetic shifting cipher, by Julius Caesar">
+                <h2><img src="./imgs/julius-ceasar.png" width="32px" height="32px">Caesar/ROT13 Cipher
+                  <button  type="submit" onclick="openPopupArticle('./resources/articles/caesar-cipher-article.html', 'Information Behind The Caesar Cipher')";>
+                    📜
+                  </button>
+                </h2>
+                <p>Popular monoalphabetic shifting cipher, by Julius Caesar.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Playfair Cipher" algorithm-content="Popular digraph substitution cipher that encrypts plaintext into pairs of letters.">
+                <h2><img src="./imgs/playfair.png" width="32px" height="32px">Playfair Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/playfair-cipher-article.html', 'Information Behind The Playfair Cipher')";>
+                    📜
+                    </button>
+                </h2>
+                <p>Popular digraph substitution cipher that encrypts plaintext into pairs of letters.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Polybius Cipher" algorithm-content="A classic grid-based subsitution cipher that convert letters into pairs of numerical coordinates">
+                <h2><img src="./imgs/polybius.png" width="32px" height="32px">Polybius Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/polybius-cipher-article.html', 'Information Behind The Polybius Cipher')";>
+                    📜
+                    </button>
+                </h2>
+                <p>A classic grid-based subsitution cipher that convert letters into pairs of numerical coordinates.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Porta Cipher" algorithm-content="Popular polyalphabetic subsitution cipher, created by Giovanni Battista della Porta.">
+                <h2><img src="./imgs/porta.png" width="32px" height="32px">Porta Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/porta-cipher-article.html', 'Information Behind The Porta Cipher')";>
+                    📜
+                    </button>
+                </h2>
+                <p>Popular polyalphabetic subsitution cipher, created by Giovanni Battista della Porta.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Rail Fence Cipher" algorithm-content="A classical transposition cipher, that rearranges a message's letters into a zigzag pattern across multiple rows.">
+                <h2><img src="./imgs/rail-fence.png" width="32px" height="32px">Rail Fence Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/rail-fence-cipher-article.html', 'Information Behind The Rail Fence Cipher')";>
+                        📜
+                    </button>
+                </h2>
+                <p>A classic transposition cipher, that rearranges a message's letters into a zigzag pattern across multiple rows.</p>
+            </div>
+            <div class="algorithm" id="algorithm" algorithm-title="Vigenère Cipher" algorithm-content="Popular polyalphabetic substitution cipher, by Giovan Battista Bellaso">
+                <h2><img src="./imgs/vigenere.png" width="32px" height="32px">Vigenère Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/vigenère-cipher-article.html', 'Information Behind The Vigenère Cipher')";>
+                    📜
+                    </button>
+                </h2>
+                <p>Popular polyalphabetic substitution cipher, created by Giovan Battista Bellaso.</p>
+            </div>
+            <h1>Stegnographic Ciphers</h1>
+            <div class="algorithm" id="algorithm" algorithm-title="Bacon Cipher" algorithm-content="A 5-bit steganographic cipher by Sir Francis Bacon that hides letters using distinct text styles, binary, or 'A/B' variables.">
+                <h2><img src="./imgs/francis-bacon.png" width="32px" height="32px">Bacon Cipher
+                    <button  type="submit" onclick="openPopupArticle('./resources/articles/baconian-cipher-article.html', 'Information Behind The Baconian Cipher')";>
+                    📜
+                    </button>
+                </h2>
+                <p>A 5-bit steganographic cipher by Sir Francis Bacon that hides letters using distinct text styles, binary, or 'A/B' variables.</p>
+        </main>
+</div>
+<dialog id="algorithm-info">
+    <div class="dialog-header">
+        <h2></h2>
+        <button onClick="closePopupArticle()" class="close-x">&times;</button>
+    </div>
+    <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
+</dialog>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const searchBar = document.getElementById("algorithm-search-bar");
+        const algorithmContainer = document.getElementById("algorithm-container");
+        const algorithms = document.querySelectorAll(".algorithm");
+        const categoryHeaders = algorithmContainer.querySelectorAll(":scope > h1");
+        const noAlgorithmExistsMessage = document.createElement('p');
+        noAlgorithmExistsMessage.appendChild(document.createTextNode("No algorithms could be found! Use different keywords!"));
+        noAlgorithmExistsMessage.style.display = 'none';
+        noAlgorithmExistsMessage.style.textAlign = 'center';
+        noAlgorithmExistsMessage.style.padding = '8px';
+        algorithmContainer.after(noAlgorithmExistsMessage);
+        function performSearch(){
+            const searchQuery = searchBar.value;
+            let visibleSearchResults = 0;
+            for(let i = 0; i < algorithms.length; i++){
+                const algorithm = algorithms[i];
+                const title = algorithm.getAttribute('algorithm-title' || '').toLowerCase();
+                const content = algorithm.getAttribute('algorithm-content' || '').toLowerCase();
+                const searchResult = title + ' ' + content;
+                if (searchQuery === '' || searchResult.includes(searchQuery)) {
+                    algorithm.style.display = '';
+                    visibleSearchResults++;
+                } else {
+                    algorithm.style.display = 'none';
+                }
+            }
+            for(let i = 0; i < categoryHeaders.length; i++){
+                const header = categoryHeaders[i];
+                let nextElement = header.nextElementSibling;
+                let hasVisibleChild = false;
+                while(nextElement && nextElement.tagName !== 'H2') {
+                    if(nextElement.classList.contains('algorithm') && nextElement.style.display !== 'none'){
+                        hasVisibleChild = true;
+                        break;
+                    }
+                    nextElement = nextElement.nextElementSibling;
+                }
+                header.style.display = (searchQuery === '' || hasVisibleChild) ? '' : 'none';
+            }
+            
+             noAlgorithmExistsMessage.style.display = (visibleSearchResults === 0 && searchQuery !== '') ? 'block' : 'none';
+        }
+
+        searchBar.addEventListener('input', performSearch);
+        searchBar.addEventListener('search', performSearch);
+    })
+
+    function openPopupArticle(filePath, dialogTitle){
+        const dialog = document.getElementById("algorithm-info");
+        const iframe = document.getElementById("algorithmIframe");
+        const dialogHeaderTitle = document.querySelector(".dialog-header > h2");
+        iframe.src = filePath;
+        dialogHeaderTitle.textContent = dialogTitle;
+        dialog.showModal();
+    }
+
+    function closePopupArticle() {
+        const dialog = document.getElementById("algorithm-info");
+        const iframe = document.getElementById("algorithmIframe");
+        dialog.close();
+        iframe.src = ""; 
+    }
+</script>
+</html>

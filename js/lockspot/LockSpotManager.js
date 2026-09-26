@@ -90,8 +90,7 @@ export class LockSpotManager {
                     );
 
                 const filled = Math.round(value * 10);
-                const barText =
-                    "●".repeat(filled) + "○".repeat(10 - filled);
+                const barText ="●".repeat(filled) + "○".repeat(10 - filled);
                 const barLabel =
                     LockSpotManager.createAppropriateReportLabel(
                         barText,
