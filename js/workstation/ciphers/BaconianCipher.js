@@ -84,73 +84,52 @@ export class BaconianCipher {
     static encrypt(plaintext, useBinary, useEarly){
         plaintext = plaintext.toUpperCase().replace("/[^A-Z]/g", "")
         let cipherText = "";
-        const encryptionDictionary = this.#getAppropriateEncryptionDictionary(useBinary, useEarly);
+        const encryptionDictionary = this.getAppropriateEncryptionDictionary(useBinary, useEarly);
         for(let i = 0; i < plaintext.length; i++){
             const character = plaintext.charAt(i);
-            cipherText += encryptionDictionary.get(String(character));
+            cipherText += (encryptionDictionary[character] || "") + " ";
         }
 
         return cipherText;
     }
 
-    static decrypt(ciphertext, useBinary, useEarly){
+    static decrypt(ciphertext, useBinary, useEarly) {
         ciphertext = ciphertext.toUpperCase();
-        if (useBinary()) {
-            ciphertext = ciphertext.replaceAll("[^01]", "");
+        if (useBinary) {
+            ciphertext = ciphertext.replaceAll(/[^01]/g, "");
         } else {
-            ciphertext = ciphertext.replaceAll("[^AB]", "");
+            ciphertext = ciphertext.replaceAll(/[^AB]/g, "");
         }
 
         let plaintext = "";
-        const decryptionDictionary = this.#getAppropriateDecryptionDictionary(useBinary, useEarly);
-        for(let i = 0; i < ciphertext.length; i+=5){
-            if(i + 5 > ciphertext.length) {
+        const decryptionDictionary = this.getAppropriateDecryptionDictionary(useBinary, useEarly);
+
+        for (let i = 0; i < ciphertext.length; i += 5) {
+            if (i + 5 > ciphertext.length) {
                 break;
             }
 
-            const encodedText = ciphertext.substring(i, i+5);
-            plaintext += decryptionDictionary.get(encodedText);
+            const encodedText = ciphertext.substring(i, i + 5);
+            const decodedChar = decryptionDictionary[encodedText];
+
+            if (decodedChar) {
+                plaintext += decodedChar;
+            }
         }
 
-        return plaintext;
+        return plaintext.trimEnd();
     }
 
-    static #getAppropriateEncryptionDictionary(useBinary, useEarly){
-        let encryptionDictionary = {};
-        if(useBinary){
-            if(useEarly){
-                encryptionDictionary = this.#earlyBaconBinaryEncryptionDictionary;
-            }else{
-                encryptionDictionary = this.#modernBaconBinaryEncryptionDictionary;
-            }
-        }else{
-            if(useEarly){
-                encryptionDictionary = this.#earlyBaconCodeEncryptionDictionary;
-            }else{
-                encryptionDictionary = this.#modernBaconCodeEncryptionDictionary;
-            }
-        }
-
-        return encryptionDictionary;
+     static getAppropriateEncryptionDictionary(useBinary, useEarly){
+        return useBinary 
+            ? (useEarly ? this.#earlyBaconBinaryEncryptionDictionary : this.#modernBaconBinaryEncryptionDictionary)
+            : (useEarly ? this.#earlyBaconCodeEncryptionDictionary : this.#modernBaconCodeEncryptionDictionary);
     }
 
-     static #getAppropriateDecryptionDictionary(useBinary, useEarly){
-        let decryptionDictionary = {};
-        if(useBinary){
-            if(useEarly){
-                decryptionDictionary = this.#earlyBaconBinaryDecryptionDictionary;
-            }else{
-                decryptionDictionary = this.#modernBaconBinaryDecryptionDictionary;
-            }
-        }else{
-            if(useEarly){
-                decryptionDictionary = this.#earlyBaconCodeDecryptionDictionary;
-            }else{
-                decryptionDictionary = this.#modernBaconCodeDecryptionDictionary;
-            }
-        }
-
-        return decryptionDictionary;
+    static getAppropriateDecryptionDictionary(useBinary, useEarly){
+        return useBinary 
+            ? (useEarly ? this.#earlyBaconBinaryDecryptionDictionary : this.#modernBaconBinaryDecryptionDictionary)
+            : (useEarly ? this.#earlyBaconCodeDecryptionDictionary : this.#modernBaconCodeDecryptionDictionary);
     }
 
     get earlyBaconCodeEncryptionDictionary(){
