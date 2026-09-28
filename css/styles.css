@@ -352,6 +352,7 @@ iframe.resource-frame {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.atbash-cipher-container,
 .bacon-cipher-container{
   display: flex;
   flex-direction: row;
@@ -366,12 +367,16 @@ iframe.resource-frame {
   box-sizing: border-box;
 }
 
+.atbash-cipher-container .plaintext-container,
+.atbash-cipher-container .ciphertext-container,
 .bacon-cipher-container .plaintext-container,
 .bacon-cipher-container .encoded-text-container {
   width: 220px;
   gap: 20px;
 }
 
+.atbash-cipher-container .plaintext-container .plaintext-textarea,
+.atbash-cipher-container .ciphertext-container .ciphertext-textarea,
 .bacon-cipher-container .plaintext-container .plaintext-textarea,
 .bacon-cipher-container .encoded-text-container .encoded-textarea {
   resize: none;
@@ -383,7 +388,7 @@ iframe.resource-frame {
   border-radius: 0 0 4px 4px;
   border: 1px solid #ccc;
 }
-
+.atbash-cipher-container label,
 .bacon-cipher-options label,
 .bacon-cipher-container label {
   display: block; 
@@ -400,6 +405,9 @@ iframe.resource-frame {
   background-color: transparent;
 }
 
+
+
+.atbash-cipher-container label,
 .bacon-cipher-container label {
   color: white;
 }
@@ -425,6 +433,7 @@ iframe.resource-frame {
   border: 1px solid black;
 }
 
+.atbash-cipher-options label,
 .bacon-cipher-options label {
   font-size: 13px;
   text-transform: uppercase;
@@ -511,4 +520,48 @@ iframe.resource-frame {
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 8px;
+}
+
+.atbash-cipher-options {
+  background-color: white;
+  justify-content: center;
+}
+
+.atbash-cipher-options .options-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid black;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 8px;
+}
+
+.atbash-cipher-options .options-content .options-row-textbox{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 90%;
+
+}
+
+.atbash-cipher-options .options-content .options-row-textbox input[type="text"] {
+  flex: 1 1 auto;
+  padding: 8px; 
+  box-sizing: border-box;
+}
+
+
+.atbash-cipher-options .options-content .options-row-checkbox-group {
+  flex-wrap: wrap;
+}
+
+.atbash-cipher-options label {
+  color: #34495e;                   
+  font-family: Arial, sans-serif; 
+  font-size: 12px;                
+  padding: 2px 2px;    
+  border-radius: 4px 4px 0 0; 
 }

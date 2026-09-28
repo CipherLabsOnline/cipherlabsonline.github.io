@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cipher Labs Online</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../workstation.html">Work Station</a>
+        <a href=""><img
+                src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+        <a href="../lockspot.html">Lock Spot</a>
+        <a href="../resources.html">Resources</a>
+    </nav>
+    <br>
+    <div class="cipher-header">
+        <h2><img src="../imgs/atbash.png" width="32px" height="32px">Atbash Cipher
+            <button title="Read More" type="submit"
+                onclick="PopupUtils.openPopupArticle('../resources/articles/atbash-cipher-article.html', 'Information Behind The Atbash Cipher')"
+                ;>
+                📜
+            </button>
+        </h2>
+        <p>Simple monoalphabetic substitution cipher where each letter is replaced by its counterpart in the reversed
+            alphabet.</p>
+    </div>
+
+    <div class="atbash-cipher-container">
+        <div class="plaintext-container">
+            <label for="plaintext">Plaintext</label>
+            <textarea id="plaintextTextArea" class="plaintext-textarea"
+                placeholder="Type your plain text here">SECRET</textarea>
+        </div>
+        <div class="ciphertext-container">
+            <label for="ciphertext">Ciphertext</label>
+            <textarea id="ciphertextTextArea" class="ciphertext-textarea"
+                placeholder="Type your ciphertext here"></textarea>
+        </div>
+    </div>
+    <aside class="atbash-cipher-options">
+        <div class="options-content">
+            <br>
+            <label><strong>Options</strong></label>
+            <div class="options-row-textbox">
+                <label>Alphabet</label>
+                <input type="text" id="alphabet-textbox" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+            </div>
+
+            <div class="options-row-checkbox-group">
+                <input type="checkbox" id="uppercase" name="uppercase" value="Uppercase">
+                <label for="uppercase">Uppercase</label>
+                <input type="checkbox" id="lowercase" name="lowercase" value="Lowercase">
+                <label for="lowercase">Lowercase</label>
+                <input type="checkbox" id="digits" name="digits" value="Digits">
+                <label for="digits">Digits</label>
+                <input type="checkbox" id="special" name="special" value="special">
+                <label for="special">Special</label>
+                <input type="checkbox" id="custom" name="custom" value="Custom">
+                <label for="custom">Custom</label>
+            </div>
+        </div>
+    </aside>
+    <dialog id="algorithm-info">
+        <div class="dialog-header">
+            <h2></h2>
+            <button onClick="PopupUtils.closePopupArticle()" class="close-x">&times;</button>
+        </div>
+        <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
+    </dialog>
+    <script src="../js/PopupUtils.js" type="module"></script>
+    <script src="../js/workstation/ciphers/Atbash.js" type="module"></script>
+    <script src="../js/Alphabets.js" type="module"></script>
+    <script type="module">
+        import { Alphabets } from '../js/Alphabets.js';
+        import { AtbashCipher } from '../js/workstation/ciphers/Atbash.js';
+
+        const plaintextTextArea = document.getElementById("plaintextTextArea");
+        const ciphertextTextArea = document.getElementById("ciphertextTextArea");
+        const uppercaseCheckmark = document.getElementById('uppercase');
+        const lowercaseCheckmark = document.getElementById('lowercase');
+        const digitsCheckmark = document.getElementById('digits');
+        const specialCheckmark = document.getElementById('special');
+        const custom = document.getElementById('custom');
+        const alphabetTextbox = document.getElementById('alphabet-textbox');
+
+        const CHAR_SETS = {
+            uppercase: Alphabets.ALPHABET,
+            lowercase: Alphabets.ALPHABET.toLowerCase(),
+            digits: "0123456789",
+            special: "!@#$%^&*()"
+        };
+
+        const checkboxesArray = [uppercaseCheckmark, lowercaseCheckmark, digitsCheckmark, specialCheckmark];
+
+        let isPlaintextLastActiveField = true;
+
+        function getAlphabet() {
+            return alphabetTextbox.value;
+        }
+
+        function syncCipher() {
+            const alphabet = getAlphabet();
+            if (!alphabet) return;
+
+            if (isPlaintextLastActiveField) {
+                ciphertextTextArea.value = AtbashCipher.encrypt(plaintextTextArea.value, alphabet);
+            } else {
+                plaintextTextArea.value = AtbashCipher.encrypt(ciphertextTextArea.value, alphabet);
+            }
+        }
+
+        function updateAlphabetTextbox() {
+            if (custom.checked) {
+                for (const checkbox of checkboxesArray) {
+                    checkbox.checked = false;
+                }
+                alphabetTextbox.readOnly = false;
+                return;
+            }
+
+            const checkboxes = [
+                { element: uppercaseCheckmark, value: CHAR_SETS.uppercase },
+                { element: lowercaseCheckmark, value: CHAR_SETS.lowercase },
+                { element: digitsCheckmark, value: CHAR_SETS.digits },
+                { element: specialCheckmark, value: CHAR_SETS.special }
+            ];
+
+            alphabetTextbox.readOnly = true;
+            const selectedChars = checkboxes
+                .filter(item => item.element.checked)
+                .map(item => item.value)
+                .join('');
+
+            alphabetTextbox.value = selectedChars;
+            syncCipher();
+        }
+
+        plaintextTextArea.addEventListener('input', () => {
+            isPlaintextLastActiveField = true;
+            syncCipher();
+        });
+
+        ciphertextTextArea.addEventListener('input', () => {
+            isPlaintextLastActiveField = false;
+            syncCipher();
+        });
+
+        alphabetTextbox.addEventListener('input', () => {
+            if (custom.checked) {
+                syncCipher();
+            }
+        });
+
+        custom.addEventListener('change', () => {
+            if (custom.checked) {
+                checkboxesArray.forEach(checkbox => checkbox.checked = false);
+                alphabetTextbox.readOnly = false;
+                alphabetTextbox.focus();
+                syncCipher();
+            } else {
+                updateAlphabetTextbox();
+            }
+        });
+
+        checkboxesArray.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    custom.checked = false;
+                }
+                updateAlphabetTextbox();
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            uppercaseCheckmark.checked = true;
+            updateAlphabetTextbox();
+        });
+    </script>
+    <br>
+    <footer>
+        <p>© 2026 CipherLabs. All rights reserved.</p>
+    </footer>
+</body>
+</html>

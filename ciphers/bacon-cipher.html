@@ -1,134 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Cipher Labs Online</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
+
 <body>
-<nav>
-    <a href="../index.html">Home</a>
-    <a href="../workstation.html">Work Station</a>
-    <a href=""><img
-            src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
-    <a href="../lockspot.html">Lock Spot</a>
-    <a href="../resources.html">Resources</a>
-</nav>
-<br>
- <div class="cipher-header">
-                <h2><img src="../imgs/francis-bacon.png" width="32px" height="32px">Bacon Cipher
-                    <button title="Read More" type="submit" onclick="PopupUtils.openPopupArticle('../resources/articles/baconian-cipher-article.html', 'Information Behind The Baconian Cipher')";>
-                    📜
-                    </button>
-                </h2>
-                <p>A 5-bit steganographic cipher by Sir Francis Bacon that hides letters using distinct text styles, binary, or 'A/B' variables.</p>       
-</div>
-<div class="bacon-cipher-container">
-    <div class="plaintext-container">
-        <label for="plaintext">Plaintext Message</label>
-        <textarea id="plaintextTextArea" class="plaintext-textarea" placeholder="Type your plain text here"></textarea>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../workstation.html">Work Station</a>
+        <a href=""><img
+                src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+        <a href="../lockspot.html">Lock Spot</a>
+        <a href="../resources.html">Resources</a>
+    </nav>
+    <br>
+    <div class="cipher-header">
+        <h2><img src="../imgs/francis-bacon.png" width="32px" height="32px">Bacon Cipher
+            <button title="Read More" type="submit"
+                onclick="PopupUtils.openPopupArticle('../resources/articles/baconian-cipher-article.html', 'Information Behind The Baconian Cipher')"
+                ;>
+                📜
+            </button>
+        </h2>
+        <p>A 5-bit steganographic cipher by Sir Francis Bacon that hides letters using distinct text styles, binary, or
+            'A/B' variables.</p>
     </div>
-    <div class="encoded-text-container">
-        <label for="encoded">Encoded Message</label>
-        <textarea id="encodedTextArea" class="encoded-textarea" placeholder="Type your encoded text here"></textarea>
+    <div class="bacon-cipher-container">
+        <div class="plaintext-container">
+            <label for="plaintext">Plaintext Message</label>
+            <textarea id="plaintextTextArea" class="plaintext-textarea"
+                placeholder="Type your plain text here">SECRET</textarea>
+        </div>
+        <div class="encoded-text-container">
+            <label for="encoded">Encoded Message</label>
+            <textarea id="encodedTextArea" class="encoded-textarea"
+                placeholder="Type your encoded text here"></textarea>
+        </div>
     </div>
-</div>
-<aside class="bacon-cipher-options">
-    
-    <div class="options-content">
-        <label><strong>Options</strong></label>
-        <label>Encoding Era</label>
-        <select id="era" id="era-select">
-            <option value="early">Early</option>
-            <option value="modern">Modern</option>
-        </select>
+    <aside class="bacon-cipher-options">
 
-        <label>Encoding Type</label>
-        <select id="encodingType">
-            <option value="binary">Binary</option>
-            <option value="code">Code A/B</option>
-        </select>
-        <label>Encoding Table</label>
-        <table id="encoding-table">
-            <thead>
-                <tr>
-                    <th>Key</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody ></tbody>
-        </table>
-    </div>
-</aside>
-<dialog id="algorithm-info">
-    <div class="dialog-header">
-        <h2></h2>
-        <button onClick="PopupUtils.closePopupArticle()" class="close-x">&times;</button>
-    </div>
-    <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
-</dialog>
-<script src="../js/PopupUtils.js" type="module"></script>
-<script type="module">
-    import { BaconianCipher } from '../js/workstation/ciphers/BaconianCipher.js';
+        <div class="options-content">
+            <label><strong>Options</strong></label>
+            <label>Encoding Era</label>
+            <select id="era" id="era-select">
+                <option value="early">Early</option>
+                <option value="modern">Modern</option>
+            </select>
 
-    const plaintextTextArea = document.getElementById("plaintextTextArea");
-    const encodedTextArea = document.getElementById("encodedTextArea");
-    const encodingEra = document.getElementById("era");
-    const encodingType = document.getElementById("encodingType");
-    let wasLastSourcePlaintext = true;
-    update();
-    function update() {
-        const useEarly = encodingEra.value === "early";
-        const useBinary = encodingType.value === "binary";
-        if (wasLastSourcePlaintext === true) {
-            const currentText = plaintextTextArea.value;
-            encodedTextArea.value = BaconianCipher.encrypt(currentText, useBinary, useEarly);
-        } else {
-            const currentText = encodedTextArea.value;
-            plaintextTextArea.value = BaconianCipher.decrypt(currentText, useBinary, useEarly);
-        }
-        const tableBody = document.querySelector("#encoding-table tbody");
-        tableBody.textContent = '';
-        for(const [key, value] of Object.entries(BaconianCipher.getAppropriateEncryptionDictionary(useBinary, useEarly))){
-            const row = document.createElement('tr');
-            const keyCell = document.createElement('td');
-            const valueCell = document.createElement('td');
-            keyCell.textContent = key;
-            valueCell.textContent = value;
-            row.appendChild(keyCell);
-            row.appendChild(valueCell);
-            tableBody.appendChild(row);
-        }
-        checkForInvalidCharacters(useBinary);
-    }
+            <label>Encoding Type</label>
+            <select id="encodingType">
+                <option value="binary">Binary</option>
+                <option value="code">Code A/B</option>
+            </select>
+            <label>Encoding Table</label>
+            <table id="encoding-table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </aside>
+    <dialog id="algorithm-info">
+        <div class="dialog-header">
+            <h2></h2>
+            <button onClick="PopupUtils.closePopupArticle()" class="close-x">&times;</button>
+        </div>
+        <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
+    </dialog>
+    <script src="../js/PopupUtils.js" type="module"></script>
+    <script type="module">
+        import { BaconianCipher } from '../js/workstation/ciphers/BaconianCipher.js';
 
-    function checkForInvalidCharacters(useBinary){
-        const hasPlainTextError = /[^a-zA-Z\s]/.test(plaintextTextArea.value);
-        plaintextTextArea.setCustomValidity(hasPlainTextError ? "Warning: Plaintext contains non-alphabetical characters." : "");
-        const invalidPattern = useBinary ? /[^01\s]/ : /[^abAB\s]/;
-        const hasEncodedError = invalidPattern.test(encodedTextArea.value);
-        const expectedChars = useBinary ? "0s and 1s" : "As and Bs";
-        encodedTextArea.setCustomValidity(hasEncodedError ? `Warning: Encoded text contains characters other than ${expectedChars}.` : "");
-        plaintextTextArea.reportValidity();
-        encodedTextArea.reportValidity();
-    }
-
-    plaintextTextArea.addEventListener('input', () => {
-        wasLastSourcePlaintext = true;
+        const plaintextTextArea = document.getElementById("plaintextTextArea");
+        const encodedTextArea = document.getElementById("encodedTextArea");
+        const encodingEra = document.getElementById("era");
+        const encodingType = document.getElementById("encodingType");
+        let wasLastSourcePlaintext = true;
         update();
-    });
+        function update() {
+            const useEarly = encodingEra.value === "early";
+            const useBinary = encodingType.value === "binary";
+            if (wasLastSourcePlaintext === true) {
+                const currentText = plaintextTextArea.value;
+                encodedTextArea.value = BaconianCipher.encrypt(currentText, useBinary, useEarly);
+            } else {
+                const currentText = encodedTextArea.value;
+                plaintextTextArea.value = BaconianCipher.decrypt(currentText, useBinary, useEarly);
+            }
+            const tableBody = document.querySelector("#encoding-table tbody");
+            tableBody.textContent = '';
+            for (const [key, value] of Object.entries(BaconianCipher.getAppropriateEncryptionDictionary(useBinary, useEarly))) {
+                const row = document.createElement('tr');
+                const keyCell = document.createElement('td');
+                const valueCell = document.createElement('td');
+                keyCell.textContent = key;
+                valueCell.textContent = value;
+                row.appendChild(keyCell);
+                row.appendChild(valueCell);
+                tableBody.appendChild(row);
+            }
+            checkForInvalidCharacters(useBinary);
+        }
 
-    encodedTextArea.addEventListener('input', () => {
-        wasLastSourcePlaintext = false;
-        update();
-    });
+        function checkForInvalidCharacters(useBinary) {
+            const hasPlainTextError = /[^a-zA-Z\s]/.test(plaintextTextArea.value);
+            plaintextTextArea.setCustomValidity(hasPlainTextError ? "Warning: Plaintext contains non-alphabetical characters." : "");
+            const invalidPattern = useBinary ? /[^01\s]/ : /[^abAB\s]/;
+            const hasEncodedError = invalidPattern.test(encodedTextArea.value);
+            const expectedChars = useBinary ? "0s and 1s" : "As and Bs";
+            encodedTextArea.setCustomValidity(hasEncodedError ? `Warning: Encoded text contains characters other than ${expectedChars}.` : "");
+            plaintextTextArea.reportValidity();
+            encodedTextArea.reportValidity();
+        }
 
-    encodingEra.addEventListener('change', update);
-    encodingType.addEventListener('change', update);
-</script>
-<br>
-<footer>
-   <p>© 2026 CipherLabs. All rights reserved.</p>
-</footer>
+        plaintextTextArea.addEventListener('input', () => {
+            wasLastSourcePlaintext = true;
+            update();
+        });
+
+        encodedTextArea.addEventListener('input', () => {
+            wasLastSourcePlaintext = false;
+            update();
+        });
+
+        encodingEra.addEventListener('change', update);
+        encodingType.addEventListener('change', update);
+    </script>
+    <br>
+    <footer>
+        <p>© 2026 CipherLabs. All rights reserved.</p>
+    </footer>
 </body>
 </html>
