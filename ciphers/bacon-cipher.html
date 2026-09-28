@@ -75,13 +75,12 @@
     const encodedTextArea = document.getElementById("encodedTextArea");
     const encodingEra = document.getElementById("era");
     const encodingType = document.getElementById("encodingType");
-    let lastSource = 'plaintext';
-
+    let wasLastSourcePlaintext = true;
+    update();
     function update() {
         const useEarly = encodingEra.value === "early";
         const useBinary = encodingType.value === "binary";
-
-        if (lastSource === 'plaintext') {
+        if (wasLastSourcePlaintext === true) {
             const currentText = plaintextTextArea.value;
             encodedTextArea.value = BaconianCipher.encrypt(currentText, useBinary, useEarly);
         } else {
@@ -90,7 +89,7 @@
         }
         const tableBody = document.querySelector("#encoding-table tbody");
         tableBody.textContent = '';
-        Object.entries(BaconianCipher.getAppropriateEncryptionDictionary(useBinary, useEarly)).forEach(([key, value]) => {
+        for(const [key, value] of Object.entries(BaconianCipher.getAppropriateEncryptionDictionary(useBinary, useEarly))){
             const row = document.createElement('tr');
             const keyCell = document.createElement('td');
             const valueCell = document.createElement('td');
@@ -99,7 +98,7 @@
             row.appendChild(keyCell);
             row.appendChild(valueCell);
             tableBody.appendChild(row);
-        });
+        }
         checkForInvalidCharacters(useBinary);
     }
 
@@ -115,12 +114,12 @@
     }
 
     plaintextTextArea.addEventListener('input', () => {
-        lastSource = 'plaintext';
+        wasLastSourcePlaintext = true;
         update();
     });
 
     encodedTextArea.addEventListener('input', () => {
-        lastSource = 'encoded';
+        wasLastSourcePlaintext = false;
         update();
     });
 
