@@ -388,7 +388,7 @@ iframe.resource-frame {
 .bacon-cipher-container label {
   display: block; 
   background-color: #007bff;     
-  color: white;                   
+  color: #34495e;                   
   font-family: Arial, sans-serif; 
   font-size: 16px;                
   padding: 6px 10px;    
@@ -398,6 +398,10 @@ iframe.resource-frame {
 
 .bacon-cipher-options label {
   background-color: transparent;
+}
+
+.bacon-cipher-container label {
+  color: white;
 }
 
 .bacon-cipher-options {
@@ -412,12 +416,13 @@ iframe.resource-frame {
 
 
 .bacon-cipher-options .options-content {
-  background-color: #34495e;
+  background-color: #ffff;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  border-radius: 0 0 8px 8px;
+  border-radius: 8px;
+  border: 1px solid black;
 }
 
 .bacon-cipher-options label {
@@ -487,7 +492,11 @@ iframe.resource-frame {
   table-layout: fixed;
   margin: 0 auto;
   border: 1px solid #4a6278;
+  font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0.1, 0.05);
+  overflow: hidden;
 }
 
 .bacon-cipher-options .options-content #encoding-table tr {
@@ -497,8 +506,8 @@ iframe.resource-frame {
 .bacon-cipher-options .options-content #encoding-table th ,
 .bacon-cipher-options .options-content #encoding-table td {
   text-align: center;
-  color: white;
-  border: 1px solid #4a6278;
+  color: #34495e;
+  border: 1px solid #dcdfe3;
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
   border-radius: 8px;
