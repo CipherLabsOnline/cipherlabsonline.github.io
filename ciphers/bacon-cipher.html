@@ -75,64 +75,7 @@
         <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
     </dialog>
     <script src="../js/popup-utils.js" type="module"></script>
-    <script type="module">
-        import { BaconianCipher } from '../js/workstation/ciphers/baconian-cipher.js';
-
-        const plaintextTextArea = document.getElementById("plaintextTextArea");
-        const encodedTextArea = document.getElementById("encodedTextArea");
-        const encodingEra = document.getElementById("era");
-        const encodingType = document.getElementById("encodingType");
-        let wasLastSourcePlaintext = true;
-        update();
-        function update() {
-            const useEarly = encodingEra.value === "early";
-            const useBinary = encodingType.value === "binary";
-            if (wasLastSourcePlaintext === true) {
-                const currentText = plaintextTextArea.value;
-                encodedTextArea.value = BaconianCipher.encrypt(currentText, useBinary, useEarly);
-            } else {
-                const currentText = encodedTextArea.value;
-                plaintextTextArea.value = BaconianCipher.decrypt(currentText, useBinary, useEarly);
-            }
-            const tableBody = document.querySelector("#encoding-table tbody");
-            tableBody.textContent = '';
-            for (const [key, value] of Object.entries(BaconianCipher.getAppropriateEncryptionDictionary(useBinary, useEarly))) {
-                const row = document.createElement('tr');
-                const keyCell = document.createElement('td');
-                const valueCell = document.createElement('td');
-                keyCell.textContent = key;
-                valueCell.textContent = value;
-                row.appendChild(keyCell);
-                row.appendChild(valueCell);
-                tableBody.appendChild(row);
-            }
-            checkForInvalidCharacters(useBinary);
-        }
-
-        function checkForInvalidCharacters(useBinary) {
-            const hasPlainTextError = /[^a-zA-Z\s]/.test(plaintextTextArea.value);
-            plaintextTextArea.setCustomValidity(hasPlainTextError ? "Warning: Plaintext contains non-alphabetical characters." : "");
-            const invalidPattern = useBinary ? /[^01\s]/ : /[^abAB\s]/;
-            const hasEncodedError = invalidPattern.test(encodedTextArea.value);
-            const expectedChars = useBinary ? "0s and 1s" : "As and Bs";
-            encodedTextArea.setCustomValidity(hasEncodedError ? `Warning: Encoded text contains characters other than ${expectedChars}.` : "");
-            plaintextTextArea.reportValidity();
-            encodedTextArea.reportValidity();
-        }
-
-        plaintextTextArea.addEventListener('input', () => {
-            wasLastSourcePlaintext = true;
-            update();
-        });
-
-        encodedTextArea.addEventListener('input', () => {
-            wasLastSourcePlaintext = false;
-            update();
-        });
-
-        encodingEra.addEventListener('change', update);
-        encodingType.addEventListener('change', update);
-    </script>
+    <script src="../js/workstation/ciphers/baconian-cipher.js" type="module"></script>
     <br>
     <footer>
         <p>© 2026 CipherLabs. All rights reserved.</p>
