@@ -71,12 +71,12 @@
         </div>
         <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
     </dialog>
-    <script src="../js/PopupUtils.js" type="module"></script>
-    <script src="../js/workstation/ciphers/Atbash.js" type="module"></script>
-    <script src="../js/Alphabets.js" type="module"></script>
+    <script src="../js/popup-utils.js" type="module"></script>
+    <script src="../js/workstation/ciphers/atbash-cipher.js" type="module"></script>
+    <script src="../js/alphabets.js" type="module"></script>
     <script type="module">
-        import { Alphabets } from '../js/Alphabets.js';
-        import { AtbashCipher } from '../js/workstation/ciphers/Atbash.js';
+        import { Alphabets } from '../js/alphabets.js';
+        import { AtbashCipher } from '../js/workstation/ciphers/atbash-cipher.js';
 
         const plaintextTextArea = document.getElementById("plaintextTextArea");
         const ciphertextTextArea = document.getElementById("ciphertextTextArea");
