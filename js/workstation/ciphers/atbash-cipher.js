@@ -1,4 +1,5 @@
 import { Alphabets } from '../../alphabets.js';
+import { AlphabetTable } from '../alphabet-table.js';
 
 const plaintextTextArea = document.getElementById("plaintextTextArea");
 const ciphertextTextArea = document.getElementById("ciphertextTextArea");
@@ -74,6 +75,13 @@ function updateAlphabetTextBox() {
         .join('');
     alphabetTextbox.value = selectedCharacters;
     encryptOrDecrypt();
+    updateAlphabetTable();
+}
+
+function updateAlphabetTable() {
+    let orderedAlphabet = alphabetTextbox.value;
+    let reversedAlphabet = orderedAlphabet.split('').reverse().join('');
+    AlphabetTable.updateAlphabetTable(orderedAlphabet, reversedAlphabet);
 }
 
 plaintextTextArea.addEventListener('input', () => {
@@ -89,6 +97,7 @@ ciphertextTextArea.addEventListener('input', () => {
 alphabetTextbox.addEventListener('input', () => {
     if (customCheckbox.checked) {
         encryptOrDecrypt();
+        updateAlphabetTable();
     }
 });
 
@@ -97,6 +106,7 @@ customCheckbox.addEventListener('change', () => {
         checkboxArray.forEach(checkbox => checkbox.checked = false);
         alphabetTextbox.readOnly = false;
         alphabetTextbox.focus();
+        updateAlphabetTable();
         encryptOrDecrypt();
     } else {
         updateAlphabetTextBox();
@@ -110,12 +120,14 @@ checkboxArray.forEach(checkbox => {
         }
 
         updateAlphabetTextBox();
+        updateAlphabetTable();
     });
 });
 
 window.addEventListener('DOMContentLoaded', () => {
     uppercaseCheckbox.checked = true;
     updateAlphabetTextBox();
+    updateAlphabetTable();
 });
 
 

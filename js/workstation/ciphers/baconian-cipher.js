@@ -142,13 +142,7 @@ update();
 function update() {
     const useEarly = encodingEra.value === "early";
     const useBinary = encodingType.value === "binary";
-    if (wasLastSourcePlaintext === true) {
-        const currentText = plaintextTextArea.value;
-        encodedTextArea.value = encrypt(currentText, useBinary, useEarly);
-    } else {
-        const currentText = encodedTextArea.value;
-        plaintextTextArea.value = decrypt(currentText, useBinary, useEarly);
-    }
+    wasLastSourcePlaintext ?  (encodedTextArea.value = encrypt(plaintextTextArea.value, useBinary, useEarly)) : (plaintextTextArea.value = decrypt(encodedTextArea.value, useBinary, useEarly));
     const tableBody = document.querySelector("#encoding-table tbody");
     tableBody.textContent = '';
     for (const [key, value] of Object.entries(getAppropriateEncryptionDictionary(useBinary, useEarly))) {
