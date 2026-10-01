@@ -86,24 +86,31 @@ export class AlphabetSelector {
     }
 
     static onCheckboxChangeEvent(encryptOrDecryptCallback, updateAlphabetTableCallback, updateAlphabetTextBoxCallback) {
-        AlphabetSelector.checkboxArray.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    AlphabetSelector.customCheckbox.checked = false;
-                }
-                updateAlphabetTextBoxCallback();
-                updateAlphabetTableCallback();
-            });
-        });
-
-        if (AlphabetSelector.customCheckbox.checked) {
-            AlphabetSelector.checkboxArray.forEach(checkbox => checkbox.checked = false);
-            AlphabetSelector.alphabetTextbox.readOnly = false;
-            AlphabetSelector.alphabetTextbox.focus();
-            updateAlphabetTableCallback();
-            encryptOrDecryptCallback();
-        } else {
+        const { customCheckbox, alphabetTextbox, checkboxArray } = AlphabetSelector;
+        checkboxArray.forEach(checkbox => checkbox?.addEventListener('change', () => {
+            if (checkbox.checked && customCheckbox) {
+                customCheckbox.checked = false;
+            }
             updateAlphabetTextBoxCallback();
-        }
+            updateAlphabetTableCallback();
+        }));
+        customCheckbox.addEventListener('change', () => {
+            if (customCheckbox.checked) {
+                checkboxArray.forEach(checkbox => {
+                    if (checkbox) {
+                        checkbox.checked = false;
+                    }
+                });
+
+                if (alphabetTextbox) {
+                    alphabetTextbox.readOnly = false;
+                    alphabetTextbox.focus();
+                }
+                updateAlphabetTableCallback();
+                encryptOrDecryptCallback();
+            } else {
+                updateAlphabetTextBoxCallback();
+            }
+        });
     }
 }
