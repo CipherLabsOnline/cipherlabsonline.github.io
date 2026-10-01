@@ -12,7 +12,7 @@ function getAlphabetTextboxValue() {
 
 function encryptOrDecrypt() {
     const alphabet = getAlphabetTextboxValue();
-    return isPlaintextTextAreaBeingUsed ? ciphertextTextArea.value = encrypt(plaintextTextArea.value, alphabet) : plaintextTextArea.value = AtbashCipher.encrypt(ciphertextTextArea.value, alphabet);
+    return isPlaintextTextAreaBeingUsed ? ciphertextTextArea.value = encrypt(plaintextTextArea.value, alphabet) : plaintextTextArea.value = decrypt(ciphertextTextArea.value, alphabet);
 }
 
 function encrypt(plaintext, customAlphabet) {
@@ -33,7 +33,7 @@ function encrypt(plaintext, customAlphabet) {
 }
 
 function decrypt(ciphertext, customAlphabet) {
-    return this.encrypt(ciphertext, customAlphabet.split('').reverse().join(''));
+    return encrypt(ciphertext, customAlphabet.split('').reverse().join(''));
 }
 
 function updateAlphabetTextBox() {
