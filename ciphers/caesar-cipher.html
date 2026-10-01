@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Atbash Cipher</title>
+    <title>Caesar Cipher</title>
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 </head>
 
@@ -18,18 +18,17 @@
     </nav>
     <br>
     <div class="cipher-header">
-        <h2><img src="../imgs/atbash.png" width="32px" height="32px">Atbash Cipher
+        <h2><img src="../imgs/julius-ceasar.png" width="32px" height="32px">Caesar Cipher
             <button title="Read More" type="submit"
-                onclick="PopupUtils.openPopupArticle('../resources/articles/atbash-cipher-article.html', 'Information Behind The Atbash Cipher')"
+                onclick="PopupUtils.openPopupArticle('../resources/articles/caesar-cipher-article.html', 'Information Behind The Caesar Cipher')"
                 ;>
                 📜
             </button>
         </h2>
-        <p>Simple monoalphabetic substitution cipher where each letter is replaced by its counterpart in the reversed
-            alphabet.</p>
+        <p>Popular monoalphabetic shifting cipher, by Julius Caesar</p>
     </div>
 
-    <div class="atbash-cipher-container">
+    <div class="caesar-cipher-container">
         <div class="plaintext-container">
             <label for="plaintext">Plaintext</label>
             <textarea id="plaintextTextArea" class="plaintext-textarea"
@@ -41,11 +40,15 @@
                 placeholder="Type your ciphertext here"></textarea>
         </div>
     </div>
-    <aside class="atbash-cipher-options">
+    <aside class="caesar-cipher-options">
         <div class="options-content">
             <br>
             <label><strong>Options</strong></label>
+
+
             <div class="options-row-textbox">
+                <label>Key</label>
+                <input type="number" id="key-textbox" value="3" min="1" max="1000000" oninput="validity.valid||(value='');">
                 <label>Alphabet</label>
                 <input type="text" id="alphabet-textbox" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
             </div>
@@ -77,7 +80,7 @@
         <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
     </dialog>
     <script src="../js/popup-utils.js" type="module"></script>
-    <script src="../js/workstation/ciphers/atbash-cipher.js" type="module"></script>
+    <script src="../js/workstation/ciphers/caesar-cipher.js" type="module"></script>
     <br>
     <footer>
         <p>© 2026 CipherLabs. All rights reserved.</p>

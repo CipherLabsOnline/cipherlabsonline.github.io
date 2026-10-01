@@ -353,6 +353,7 @@ iframe.resource-frame {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.caesar-cipher-container,
 .atbash-cipher-container,
 .bacon-cipher-container {
   display: flex;
@@ -372,6 +373,8 @@ iframe.resource-frame {
 
 .atbash-cipher-container .plaintext-container,
 .atbash-cipher-container .ciphertext-container,
+.caesar-cipher-container .plaintext-container,
+.caesar-cipher-container .ciphertext-container,
 .bacon-cipher-container .plaintext-container,
 .bacon-cipher-container .encoded-text-container {
   width: 220px;
@@ -380,6 +383,8 @@ iframe.resource-frame {
 
 .atbash-cipher-container .plaintext-container .plaintext-textarea,
 .atbash-cipher-container .ciphertext-container .ciphertext-textarea,
+.caesar-cipher-container .plaintext-container .plaintext-textarea,
+.caesar-cipher-container .ciphertext-container .ciphertext-textarea,
 .bacon-cipher-container .plaintext-container .plaintext-textarea,
 .bacon-cipher-container .encoded-text-container .encoded-textarea {
   resize: none;
@@ -393,6 +398,7 @@ iframe.resource-frame {
 }
 
 .atbash-cipher-container label,
+.caesar-cipher-container label,
 .bacon-cipher-options label,
 .bacon-cipher-container label {
   display: block;
@@ -412,11 +418,13 @@ iframe.resource-frame {
 
 
 .atbash-cipher-container label,
+.caesar-cipher-container label,
 .bacon-cipher-container label {
   color: white;
 }
 
-.bacon-cipher-options {
+.bacon-cipher-options,
+.caesar-cipher-options{
   display: flow-root;
   justify-content: center;
   align-items: center;
@@ -427,7 +435,8 @@ iframe.resource-frame {
 }
 
 
-.bacon-cipher-options .options-content {
+.bacon-cipher-options .options-content,
+.caesar-cipher-options .options-content {
   background-color: #ffff;
   padding: 16px;
   display: flex;
@@ -438,12 +447,14 @@ iframe.resource-frame {
 }
 
 .atbash-cipher-options label,
+.caesar-cipher-options label,
 .bacon-cipher-options label {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: -4px;
 }
+
 
 .bacon-cipher-options select {
   width: 100%;
@@ -534,7 +545,8 @@ iframe.resource-frame {
   justify-content: center;
 }
 
-.atbash-cipher-options .options-content {
+.atbash-cipher-options .options-content,
+.caesar-cipher-options .options-content{
   display: flex;
   flex-direction: column;
   margin-top: 10px;
@@ -546,12 +558,28 @@ iframe.resource-frame {
   border-radius: 8px;
 }
 
-.atbash-cipher-options .options-content .options-row-textbox {
+.atbash-cipher-options .options-content .options-row-textbox{
   display: flex;
   align-items: center;
   gap: 0.5rem;
   width: 90%;
+}
 
+.caesar-cipher-options .options-content .options-row-textbox {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%;
+}
+
+.caesar-cipher-options .options-content .options-row-textbox input[type="text"],
+.caesar-cipher-options .options-content .options-row-textbox input[type="number"] {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .atbash-cipher-options .options-content .options-row-textbox input[type="text"] {
