@@ -1,4 +1,4 @@
-import { AlphabetTable } from "../alphabet-table.js"
+import { SubstitutionTable } from "../substitution-table.js"
 import { AlphabetSelector } from "../alphabet-selector.js"
 
 const plaintextTextArea = document.getElementById("plaintextTextArea");
@@ -48,14 +48,14 @@ function encryptOrDecrypt() {
 }
 
 function updateAlphabetTextBox() {
-    AlphabetSelector.updateAlphabetTextBox(encryptOrDecrypt, updateAlphabetTable);
+    AlphabetSelector.updateAlphabetTextBox(encryptOrDecrypt, updateSubstitutionTable);
 }
 
-function updateAlphabetTable() {
+function updateSubstitutionTable() {
     let orderedAlphabet = AlphabetSelector.alphabetTextbox.value;
     const shift = parseInt(keyTextbox.value) % orderedAlphabet.length;
     let shiftedAlphabet = orderedAlphabet.slice(shift) + orderedAlphabet.slice(0, shift);
-    AlphabetTable.updateAlphabetTable(orderedAlphabet, shiftedAlphabet);
+    SubstitutionTable.updateSubstitutionTable(orderedAlphabet, shiftedAlphabet);
 }
 
 
@@ -69,8 +69,8 @@ ciphertextTextArea.addEventListener('input', () => {
     encryptOrDecrypt();
 });
 
-AlphabetSelector.onAlphabetTextboxInputEvent(encryptOrDecrypt, updateAlphabetTable);
-AlphabetSelector.onCheckboxChangeEvent(encryptOrDecrypt, updateAlphabetTable, updateAlphabetTextBox);
+AlphabetSelector.onAlphabetTextboxInputEvent(encryptOrDecrypt, updateSubstitutionTable);
+AlphabetSelector.onCheckboxChangeEvent(encryptOrDecrypt, updateSubstitutionTable, updateAlphabetTextBox);
 
 
 keyTextbox.addEventListener('input', () => {
@@ -78,12 +78,12 @@ keyTextbox.addEventListener('input', () => {
         return;
     } else {
         encryptOrDecrypt();
-        updateAlphabetTable();
+        updateSubstitutionTable();
     }
 })
 
 window.addEventListener('DOMContentLoaded', () => {
     AlphabetSelector.uppercaseCheckbox.checked = true;
     updateAlphabetTextBox();
-    updateAlphabetTable();
+    updateSubstitutionTable();
 });

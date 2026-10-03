@@ -1,4 +1,4 @@
-import { AlphabetTable } from '../alphabet-table.js';
+import { SubstitutionTable } from '../substitution-table.js';
 import { AlphabetSelector } from '../alphabet-selector.js';
 
 const plaintextTextArea = document.getElementById("plaintextTextArea");
@@ -37,13 +37,13 @@ function decrypt(ciphertext, customAlphabet) {
 }
 
 function updateAlphabetTextBox() {
-    AlphabetSelector.updateAlphabetTextBox(encryptOrDecrypt, updateAlphabetTable);
+    AlphabetSelector.updateAlphabetTextBox(encryptOrDecrypt, updateSubstitutionTable);
 }
 
-function updateAlphabetTable() {
+function updateSubstitutionTable() {
     let orderedAlphabet = AlphabetSelector.alphabetTextbox.value;
     let reversedAlphabet = orderedAlphabet.split('').reverse().join('');
-    AlphabetTable.updateAlphabetTable(orderedAlphabet, reversedAlphabet);
+    SubstitutionTable.updateSubstitutionTable(orderedAlphabet, reversedAlphabet);
 }
 
 plaintextTextArea.addEventListener('input', () => {
@@ -56,13 +56,13 @@ ciphertextTextArea.addEventListener('input', () => {
     encryptOrDecrypt();
 });
 
-AlphabetSelector.onAlphabetTextboxInputEvent(encryptOrDecrypt, updateAlphabetTable);
-AlphabetSelector.onCheckboxChangeEvent(encryptOrDecrypt, updateAlphabetTable, updateAlphabetTextBox);
+AlphabetSelector.onAlphabetTextboxInputEvent(encryptOrDecrypt, updateSubstitutionTable);
+AlphabetSelector.onCheckboxChangeEvent(encryptOrDecrypt, updateSubstitutionTable, updateAlphabetTextBox);
 
 window.addEventListener('DOMContentLoaded', () => {
     AlphabetSelector.uppercaseCheckbox.checked = true;
     updateAlphabetTextBox();
-    updateAlphabetTable();
+    updateSubstitutionTable();
 });
 
 

@@ -601,7 +601,7 @@ iframe.resource-frame {
   width: 100%;
 }
 
-#alphabets-table {
+#substitution-table {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
@@ -612,7 +612,7 @@ iframe.resource-frame {
   margin-right: 6px;
 }
 
-#alphabets-table td {
+#substitution-table td {
   text-align: center;
   border: 1px solid #e2e8f0;
   padding: 4px 0;

@@ -1,5 +1,5 @@
 import { Alphabets } from '../alphabets.js';
-import { AlphabetTable } from './alphabet-table.js';
+import { SubstitutionTable } from './substitution-table.js';
 export class AlphabetSelector {
 
     static CHAR_DICTIONARY = {
@@ -42,7 +42,7 @@ export class AlphabetSelector {
         ];
     }
 
-    static updateAlphabetTextBox(encryptOrDecryptCallback, updateAlphabetTableCallback) {
+    static updateAlphabetTextBox(encryptOrDecryptCallback, updateTableCallback) {
         if (AlphabetSelector.customCheckbox.checked) {
             AlphabetSelector.checkboxArray.forEach(checkbox => {
                 if (checkbox) checkbox.checked = false;
@@ -73,26 +73,26 @@ export class AlphabetSelector {
         }
 
         encryptOrDecryptCallback();
-        updateAlphabetTableCallback();
+        updateTableCallback();
     }
 
-    static onAlphabetTextboxInputEvent(encryptOrDecryptCallback, updateAlphabetTableCallback) {
+    static onAlphabetTextboxInputEvent(encryptOrDecryptCallback, updateTableCallback) {
         AlphabetSelector.alphabetTextbox.addEventListener('input', () => {
             if (AlphabetSelector.customCheckbox.checked) {
                 encryptOrDecryptCallback();
-                updateAlphabetTableCallback();
+                updateTableCallback();
             }
         });
     }
 
-    static onCheckboxChangeEvent(encryptOrDecryptCallback, updateAlphabetTableCallback, updateAlphabetTextBoxCallback) {
+    static onCheckboxChangeEvent(encryptOrDecryptCallback, updateTableCallback, updateAlphabetTextBoxCallback) {
         const { customCheckbox, alphabetTextbox, checkboxArray } = AlphabetSelector;
         checkboxArray.forEach(checkbox => checkbox?.addEventListener('change', () => {
             if (checkbox.checked && customCheckbox) {
                 customCheckbox.checked = false;
             }
             updateAlphabetTextBoxCallback();
-            updateAlphabetTableCallback();
+            updateTableCallback();
         }));
         customCheckbox.addEventListener('change', () => {
             if (customCheckbox.checked) {
@@ -106,7 +106,7 @@ export class AlphabetSelector {
                     alphabetTextbox.readOnly = false;
                     alphabetTextbox.focus();
                 }
-                updateAlphabetTableCallback();
+                updateTableCallback();
                 encryptOrDecryptCallback();
             } else {
                 updateAlphabetTextBoxCallback();
