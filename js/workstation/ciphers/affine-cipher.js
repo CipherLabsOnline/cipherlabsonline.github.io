@@ -102,7 +102,6 @@ function validateKeyB(alphabetLength) {
 
 function validateKeyA(alphabetLength) {
     let keyAValue = +keyATextbox.value;
-
     while (MathUtils.gcd(keyAValue, alphabetLength) !== 1) {
         keyAValue++;
     }
@@ -142,13 +141,15 @@ AlphabetSelector.checkboxArray.forEach(checkbox => {
     checkbox.addEventListener('change', () => {
         let currentText = AlphabetSelector.alphabetTextbox.value;
         let alphabetLength = currentText.length;
-        validateKeyB(alphabetLength);
-        validateKeyA(alphabetLength)
+        if (alphabetLength > 0) {
+            validateKeyB(alphabetLength);
+            validateKeyA(alphabetLength);
+        }
     })
 })
 
 AlphabetSelector.alphabetTextbox.addEventListener('input', (e) => {
-    let alphabetLength =  AlphabetSelector.applyDefaultAlphabetSelection(updateAlphabetTextBox, updateSubstitutionTable);
+    let alphabetLength = AlphabetSelector.applyDefaultAlphabetSelection(updateAlphabetTextBox, updateSubstitutionTable);
     validateKeyB(alphabetLength);
     validateKeyA(alphabetLength)
 });
