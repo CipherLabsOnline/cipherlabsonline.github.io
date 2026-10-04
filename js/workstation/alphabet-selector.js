@@ -88,6 +88,11 @@ export class AlphabetSelector {
     static onCheckboxChangeEvent(encryptOrDecryptCallback, updateTableCallback = () => { }, updateAlphabetTextBoxCallback) {
         const { customCheckbox, alphabetTextbox, checkboxArray } = AlphabetSelector;
         checkboxArray.forEach(checkbox => checkbox?.addEventListener('change', () => {
+            //Prevents an empty checkbox selection catastophe
+            if(checkboxArray.filter(checkbox => checkbox && checkbox.checked).length == 0 && (!customCheckbox.checked)){
+                checkbox.checked = true;
+                return;
+            }
             if (checkbox.checked && customCheckbox) {
                 customCheckbox.checked = false;
             }
