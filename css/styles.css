@@ -353,6 +353,7 @@ iframe.resource-frame {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.affine-cipher-container,
 .caesar-cipher-container,
 .atbash-cipher-container,
 .bacon-cipher-container {
@@ -371,6 +372,8 @@ iframe.resource-frame {
   box-sizing: border-box;
 }
 
+.affine-cipher-container .plaintext-container,
+.affine-cipher-container .ciphertext-container,
 .atbash-cipher-container .plaintext-container,
 .atbash-cipher-container .ciphertext-container,
 .caesar-cipher-container .plaintext-container,
@@ -381,6 +384,8 @@ iframe.resource-frame {
   gap: 20px;
 }
 
+.affine-cipher-container .plaintext-container .plaintext-textarea,
+.affine-cipher-container .ciphertext-container .ciphertext-textarea,
 .atbash-cipher-container .plaintext-container .plaintext-textarea,
 .atbash-cipher-container .ciphertext-container .ciphertext-textarea,
 .caesar-cipher-container .plaintext-container .plaintext-textarea,
@@ -397,6 +402,7 @@ iframe.resource-frame {
   border: 1px solid #ccc;
 }
 
+.affine-cipher-container label,
 .atbash-cipher-container label,
 .caesar-cipher-container label,
 .bacon-cipher-options label,
@@ -416,13 +422,14 @@ iframe.resource-frame {
 }
 
 
-
+.affine-cipher-container label,
 .atbash-cipher-container label,
 .caesar-cipher-container label,
 .bacon-cipher-container label {
   color: white;
 }
 
+.affine-cipher-options,
 .bacon-cipher-options,
 .caesar-cipher-options {
   display: flow-root;
@@ -436,6 +443,7 @@ iframe.resource-frame {
 
 
 .bacon-cipher-options .options-content,
+.affine-cipher-options .options-content,
 .caesar-cipher-options .options-content {
   background-color: #ffff;
   padding: 16px;
@@ -445,7 +453,7 @@ iframe.resource-frame {
   border-radius: 8px;
   border: 1px solid black;
 }
-
+.affine-cipher-options label,
 .atbash-cipher-options label,
 .caesar-cipher-options label,
 .bacon-cipher-options label {
@@ -544,7 +552,7 @@ iframe.resource-frame {
   background-color: white;
   justify-content: center;
 }
-
+.affine-cipher-options .options-content,
 .atbash-cipher-options .options-content,
 .caesar-cipher-options .options-content {
   display: flex;
@@ -584,6 +592,7 @@ iframe.resource-frame {
   border-radius: 4px 4px 0 0;
 }
 
+.affine-cipher-options .options-content .options-row-textbox-group,
 .caesar-cipher-options .options-content .options-row-textbox-group {
   display: flex;
   align-items: center;
@@ -592,6 +601,8 @@ iframe.resource-frame {
   width: 90%;
 }
 
+.affine-cipher-options .options-content .options-row-textbox-group input[type="text"],
+.affine-cipher-options .options-content .options-row-textbox-group input[type="number"],
 .caesar-cipher-options .options-content .options-row-textbox-group input[type="text"],
 .caesar-cipher-options .options-content .options-row-textbox-group input[type="number"] {
   display: flex;

@@ -58,7 +58,6 @@ function updateSubstitutionTable() {
     SubstitutionTable.updateSubstitutionTable(orderedAlphabet, shiftedAlphabet);
 }
 
-
 plaintextTextArea.addEventListener('input', () => {
     isPlaintextTextAreaBeingUsed = true;
     encryptOrDecrypt();
@@ -69,8 +68,9 @@ ciphertextTextArea.addEventListener('input', () => {
     encryptOrDecrypt();
 });
 
-AlphabetSelector.onAlphabetTextboxInputEvent(encryptOrDecrypt, updateSubstitutionTable);
+AlphabetSelector.onCustomCheckBoxEvent(encryptOrDecrypt, updateSubstitutionTable);
 AlphabetSelector.onCheckboxChangeEvent(encryptOrDecrypt, updateSubstitutionTable, updateAlphabetTextBox);
+AlphabetSelector.onEmptyAlphabetTextboxEvent(updateAlphabetTextBox, updateSubstitutionTable);
 
 
 keyTextbox.addEventListener('input', () => {
@@ -79,8 +79,9 @@ keyTextbox.addEventListener('input', () => {
     } else {
         encryptOrDecrypt();
         updateSubstitutionTable();
+    
     }
-})
+});
 
 window.addEventListener('DOMContentLoaded', () => {
     AlphabetSelector.uppercaseCheckbox.checked = true;

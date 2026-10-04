@@ -42,14 +42,14 @@ export class AlphabetSelector {
         ];
     }
 
-    static updateAlphabetTextBox(encryptOrDecryptCallback, updateTableCallback) {
+    static updateAlphabetTextBox(encryptOrDecryptCallback, updateTableCallback = () => { }) {
         if (AlphabetSelector.customCheckbox.checked) {
             AlphabetSelector.checkboxArray.forEach(checkbox => {
                 if (checkbox) checkbox.checked = false;
             });
 
-            if (AlphabetTextbox.alphabetTextbox) {
-                AlphabetTextbox.alphabetTextbox.readOnly = false;
+            if (AlphabetSelector.alphabetTextbox) {
+                AlphabetSelector.alphabetTextbox.readOnly = false;
             }
             return;
         }
@@ -76,7 +76,7 @@ export class AlphabetSelector {
         updateTableCallback();
     }
 
-    static onAlphabetTextboxInputEvent(encryptOrDecryptCallback, updateTableCallback) {
+    static onCustomCheckBoxEvent(encryptOrDecryptCallback, updateTableCallback = () => { }) {
         AlphabetSelector.alphabetTextbox.addEventListener('input', () => {
             if (AlphabetSelector.customCheckbox.checked) {
                 encryptOrDecryptCallback();
@@ -85,7 +85,7 @@ export class AlphabetSelector {
         });
     }
 
-    static onCheckboxChangeEvent(encryptOrDecryptCallback, updateTableCallback, updateAlphabetTextBoxCallback) {
+    static onCheckboxChangeEvent(encryptOrDecryptCallback, updateTableCallback = () => { }, updateAlphabetTextBoxCallback) {
         const { customCheckbox, alphabetTextbox, checkboxArray } = AlphabetSelector;
         checkboxArray.forEach(checkbox => checkbox?.addEventListener('change', () => {
             if (checkbox.checked && customCheckbox) {
@@ -109,8 +109,31 @@ export class AlphabetSelector {
                 updateTableCallback();
                 encryptOrDecryptCallback();
             } else {
+                checkboxArray[0].checked = true;
                 updateAlphabetTextBoxCallback();
             }
         });
+    }
+
+    static onEmptyAlphabetTextboxEvent(updateAlphabetTextBox, updateSubstitutionTable) {
+        AlphabetSelector.alphabetTextbox.addEventListener("input", () => {
+            AlphabetSelector.applyDefaultAlphabetSelection(updateAlphabetTextBox, updateSubstitutionTable);
+        });
+    }
+
+    static applyDefaultAlphabetSelection(updateAlphabetTextboxCallback, updateTableCallback = () => { }) {
+        let currentText = AlphabetSelector.alphabetTextbox.value;
+        let alphabetLength = currentText.length;
+        if (alphabetLength < 1) {
+            AlphabetSelector.alphabetTextbox.readOnly = true;
+            AlphabetSelector.customCheckbox.checked = false;
+            AlphabetSelector.uppercaseCheckbox.checked = true;
+            updateAlphabetTextboxCallback();
+            updateTableCallback();
+            currentText = AlphabetSelector.alphabetTextbox.value;
+            alphabetLength = currentText.length;
+        }
+
+        return alphabetLength;
     }
 }

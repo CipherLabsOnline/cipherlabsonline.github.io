@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Affine Cipher</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../workstation.html">Work Station</a>
+        <a href=""><img
+                src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+        <a href="../lockspot.html">Lock Spot</a>
+        <a href="../resources.html">Resources</a>
+    </nav>
+    <br>
+    <div class="cipher-header">
+        <h2><img src="../imgs/affine.png" width="32px" height="32px">Affine Cipher
+            <button title="Read More" type="submit"
+                onclick="PopupUtils.openPopupArticle('../resources/articles/affine-cipher-article.html', 'Information Behind The Affine Cipher')"
+                ;>
+                📜
+            </button>
+        </h2>
+        <p>Simple monoalphabetic substitution cipher that converts each letter to a number and applies a linear function.</p>
+    </div>
+
+    <div class="affine-cipher-container">
+        <div class="plaintext-container">
+            <label for="plaintext">Plaintext</label>
+            <textarea id="plaintextTextArea" class="plaintext-textarea"
+                placeholder="Type your plain text here">SECRET</textarea>
+        </div>
+        <div class="ciphertext-container">
+            <label for="ciphertext">Ciphertext</label>
+            <textarea id="ciphertextTextArea" class="ciphertext-textarea"
+                placeholder="Type your ciphertext here"></textarea>
+        </div>
+    </div>
+    <aside class="affine-cipher-options">
+        <div class="options-content">
+            <br>
+            <label><strong>Options</strong></label>
+
+
+            <div class="options-row-textbox-group">
+                <label>Key A</label>
+                <input type="number" id="key-a-textbox" value="25" min="1" oninput="validity.valid||(value='');">
+                <label>Key B</label>
+                <input type="number" id="key-b-textbox" value="3" min="1" oninput="validity.valid||(value='');">
+                <label>Alphabet</label>
+                <input type="text" id="alphabet-textbox" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+            </div>
+
+            <div class="options-row-checkbox-group">
+                <input type="checkbox" id="uppercase" name="uppercase" value="Uppercase">
+                <label for="uppercase">Uppercase</label>
+                <input type="checkbox" id="lowercase" name="lowercase" value="Lowercase">
+                <label for="lowercase">Lowercase</label>
+                <input type="checkbox" id="digits" name="digits" value="Digits">
+                <label for="digits">Digits</label>
+                <input type="checkbox" id="punctuation-marks" name="punctuation-marks" value="punctuation-marks">
+                <label for="punctuation-marks">Punctuation Marks</label>
+                <input type="checkbox" id="custom" name="custom" value="Custom">
+                <label for="custom">Custom</label>
+            </div>
+            <div style="overflow-x: auto;">
+                <center><label>Substitution Table</label></center>
+                <table id="substitution-table">
+                </table>
+            </div>
+        </div>
+    </aside>
+    <dialog id="algorithm-info">
+        <div class="dialog-header">
+            <h2></h2>
+            <button onClick="PopupUtils.closePopupArticle()" class="close-x">&times;</button>
+        </div>
+        <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
+    </dialog>
+    <script src="../js/popup-utils.js" type="module"></script>
+    <script src="../js/workstation/ciphers/affine-cipher.js" type="module"></script>
+    <br>
+    <footer>
+        <p>© 2026 CipherLabs. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

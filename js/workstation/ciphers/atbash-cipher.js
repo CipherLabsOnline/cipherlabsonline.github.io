@@ -56,8 +56,9 @@ ciphertextTextArea.addEventListener('input', () => {
     encryptOrDecrypt();
 });
 
-AlphabetSelector.onAlphabetTextboxInputEvent(encryptOrDecrypt, updateSubstitutionTable);
+AlphabetSelector.onCustomCheckBoxEvent(encryptOrDecrypt, updateSubstitutionTable);
 AlphabetSelector.onCheckboxChangeEvent(encryptOrDecrypt, updateSubstitutionTable, updateAlphabetTextBox);
+AlphabetSelector.onEmptyAlphabetTextboxEvent(updateAlphabetTextBox, updateSubstitutionTable);
 
 window.addEventListener('DOMContentLoaded', () => {
     AlphabetSelector.uppercaseCheckbox.checked = true;
