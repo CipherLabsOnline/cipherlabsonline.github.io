@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./css/styles.css">
 </head>
 
-<body>
+<body style="background-color: #2c3e50;">
     <nav>
         <a href="index.html">Home</a>
         <a href="workstation.html">Work Station</a>
@@ -16,99 +16,115 @@
         <a href="./cryptanalysis/lockspot.html">Lock Spot</a>
         <a href="resources.html">Resources</a>
     </nav>
-    <div class="container">
-        <section class="section">
-            <center>
-                <h2>Welcome To Cipher Labs Online 👋</h2>
-            </center>
-            <div class="resource-container">
-                <div class="resource-card">
-                    <p>
-                        Cipher Labs Online is the web application variant of Cipher Labs desktop application.
-                        We're giving users the option to experiment with the program, if you can't or don't wish to
-                        download
-                        the Cipher Labs desktop application.
-                        Both applications will of course differ in navigation, and user interface, but both tools are
-                        made
-                        to act similar in functionality.
-                        If you wish to download the desktop variant, and try it out, by all means visit
-                        <a href="https://github.com/dug22/Cipher-Labs">Cipher Labs Repository</a>.
-                        Cipher Labs Online offers you access to a personal workstation to experiment with different
-                        cryptographic algorithms, Lock Spot, a machine learning tool that allows you to analyze
-                        ciphertexts,
-                        and an archive of resources with information on different cryptographic algorithms and
-                        documentation
-                        on how the program works.
-                    </p>
+    <div class="home-container">
+        <div class="welcome-container">
+            <h2>Welcome To Cipher Labs</h2>
+            <p>Learn And Instruct Cryptography</p>
+            <span>
+                Cipher Labs offers a handful of cryptographic tools to teach students and researchers the fundamentals
+                of cryptography.
+            </span>
+        </div>
+        <div class="line-divider"></div>
+        <div class="cards-container">
+
+            <div class="column">
+                <div class="card">
+                    <img src="https://i.imgur.com/OvkaUL8.png">
+                    <div class="card-text">
+                        <h2>Cipher Labs Desktop</h2>
+
+                        <p>Cipher Labs Desktop is the original elearning platform, that teaches cybersecurity students
+                            and
+                            researchers the fundamentals of modern cryptology and cryptanalysis. Use it to visually
+                            learn a
+                            wide range of cryptographic algorithms, and cryptanalysis methods. Supports both Windows and
+                            Linux</p>
+                        <button type="button"
+                            onclick="window.location.href='https://github.com/dug22/Cipher-Labs/releases'">Download
+                            Cipher Labs Desktop</button>
+                    </div>
                 </div>
+                <div class="line-divider"></div>
             </div>
-        </section>
-        <section class="section">
-            <center>
-                <h2>Work Station 🖥️</h2>
-            </center>
-            <div class="resource-container">
-                <div class="resource-card">
-                    <p>
-                        Cipher Labs workstation modules allows you to expand your understanding of cryptography by
-                        moving from theory to practicality.
-                        Access and utilize a handful of Cipher Labs cryptographic
-                        functions, and cryptanalysis tools to experiment with.
-                    </p>
+            <div class="column">
+                <div class="card">
+                    <img src="https://i.imgur.com/65fgoFq.png">
+                    <div class="card-text">
+                        <h2>Cipher Labs Online</h2>
+                        <p>Cipher Labs Online is the web variant of Cipher Labs Desktop.
+                            Cipher Labs Online offers a handful of tools to experiment with a range of cryptographic
+                            functions and algorithms. Get started by clicking on "Workstation" in the top navigation, or
+                            the “Get Started” button below. Accessible via browser.
+                        </p>
+                        <button type="button"
+                            onclick="window.location.href='https://cipherlabsonline.github.io/workstation.html'">Get
+                            Started</button>
+                    </div>
                 </div>
+                <div class="line-divider"></div>
             </div>
-        </section>
-        <section class="section">
-            <center>
-                <h2>Lock Spot 🤖</h2>
-            </center>
-            <div class="resource-container">
-                <div class="resource-card">
-                    <p>
-                        Lock Spot is a machine learning tool that allows users to input ciphertext and receive a
-                        conducted
-                        analysis of the cipher algorithm most likely used to encrypt it, along with the cipher category
-                        it
-                        most likely belongs to (such as monoalphabetic substitution, polyalphabetic substitution,
-                        transposition, and more). If you have ciphertext that you need to conduct analysis with utilize
-                        Cipher Labs Lock Spot module.
-                    </p>
+            <div class="column">
+                <div class="card">
+                    <img src="./imgs/lock-spot.png">
+                    <div class="card-text">
+                        <h2>Lock Spot</h2>
+                        <p>
+                            Lock Spot was one of the very first tools that laid the foundation for Cipher Labs today.
+                            It is a cryptanalysis tool that uses machine learning to identify the cipher type and
+                            algorithm from just a short sample of ciphertext. Get started by clicking on "Lock Spot" in the top navigation, or
+                            the “Get Started” button below. Accessible via browser or through Cipher Labs Desktop application.
+                        </p>
+                        <button type="button"
+                            onclick="window.location.href='https://cipherlabsonline.github.io/cryptanalysis/lockspot.html'">Get
+                            Started</button>
+                    </div>
                 </div>
+                <div class="line-divider"></div>
             </div>
-        </section>
-        <section class="section">
-            <center>
-                <h2>Resources 📖</h2>
-            </center>
-            <div class="resource-container">
-                <div class="resource-card">
-                    <p>
-                        Access a collection of resources featuring documentation on how Cipher Labs operates, along with
-                        comprehensive articles detailing the history and procedures of how cryptographic algorithms
-                        work.
-                        These articles serve as a foundational guide to help you learn and understand the core
-                        concepts about Cipher Labs and how every available cipher on our platform works. Use this
-                        archive
-                        extensively to help you learn and build up your knowledge in cryptography, while getting
-                        hands-on
-                        experience in the field.
-                    </p>
+            <div class="column">
+                <div class="card">
+                    <img src="https://i.imgur.com/B0xuZfq.png">
+                    <div class="card-text">
+                        <h2>Resources</h2>
+                        <p>Explore our archive of Cipher Labs documentation and cryptography guides to master
+                            foundational concepts, understand how platform ciphers work, and build hands-on skills.
+                            Get started by clicking on "Resources" in the top navigation, or the “Get Started” button
+                            below. Accessible via browser or through Cipher Labs Desktop application.
+                        </p>
+                        <button type="button"
+                            onclick="window.location.href='https://cipherlabsonline.github.io/resources.html'">Get
+                            Started</button>
+                    </div>
                 </div>
+                <div class="line-divider"></div>
             </div>
-        </section>
-        <section class="section">
-            <center>
-                <h2>Have Any Questions?</h2>
-            </center>
-            <div class="resource-container">
-                <div class="resource-card">
-                    <p>
-                        If you have any questions regarding Cipher Labs, please create an issue on <a
-                            href="https://github.com/dug22/Cipher-Labs/issues">Cipher Labs Repository Page</a>.
-                    </p>
+            <div class="column">
+                <div class="card">
+                    <img src="https://brand.github.com/_next/static/media/logo-03.cc5e5332.png">
+                    <div class="card-text">
+                        <h2>Stay Updated!</h2>
+                        <p>Stay up to date on the latest features, bug fixes, etc., by following Cipher Labs and Cipher
+                            Labs Online GitHub page. If you have any questions, or suggestions, please feel free to
+                            create an issue on Cipher Labs GitHub page!
+                        </p>
+
+                        <div class="card-button-group">
+                            <button type="button"
+                                onclick="window.location.href='https://github.com/dug22/Cipher-Labs'">Cipher Labs
+                                GitHub</button>
+                            <button type="button"
+                                onclick="window.location.href='https://github.com/CipherLabsOnline/cipherlabsonline.github.io'">Cipher
+                                Labs Online GitHub</button>
+                            <button type="button"
+                                onclick="window.location.href='https://github.com/dug22/Cipher-Labs/issues'">Cipher Labs
+                                GitHub Issue Page</button>
+                        </div>
+                    </div>
                 </div>
+                <div class="line-divider"></div>
             </div>
-        </section>
+        </div>
     </div>
     <footer>
         <p>© 2026 CipherLabs. All rights reserved.</p>
