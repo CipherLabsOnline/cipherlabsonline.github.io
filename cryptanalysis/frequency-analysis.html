@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Frequency Analysis</title>
+    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="workstation.html">Work Station</a>
+        <a href=""><img
+                src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+        <a href="./lockspot.html">Lock Spot</a>
+        <a href="resources.html">Resources</a>
+    </nav>
+    <br>
+    <div class="cryptanalysis-header">
+        <h2><img src="../imgs/frequency-analysis-graph.png" width="32px" height="32px">Frequency Analysis
+            <button id="readMoreButton" title="Read More" type="submit" ;>
+                📜
+            </button>
+        </h2>
+        <p>Analyze specific text to find and count recurring character combinations.</p>
+    </div>
+
+    <div class="frequency-analysis-container">
+        <br>
+        <label>Cipher Textbox</label>
+        <label>Swap Analysis Textbox</label>
+        <label>Swap Analysis Textbox Log</label>
+        <textarea class="cipher-textarea"
+            id="cipher-textarea">COCBKPILQDAQWUWEEGUUHWNNAETCEMGFVJGGPETARVGFVGZV</textarea>
+
+        <textarea class="swap-textarea" id="swap-textarea">COCBKPILQDAQWUWEEGUUHWNNAETCEMGFVJGGPETARVGFVGZV</textarea>
+
+        <textarea class="swap-log-textarea" id="swap-log-textarea"></textarea>
+        <div class="characters-typed">
+            <span id="charCount">Characters Typed: 0</span>
+        </div>
+        <div style="flex-basis: 100%; height: 0;"></div>
+        <div class="frequency-analysis-options">
+            <h4>&#9881; Frequency Analysis Settings</h4>
+            <label for="ngram-select">Select N-Gram</label>
+            <select id="ngram-select">
+                <option value="1">Unigram (1)</option>
+                <option value="2">Bigram (2)</option>
+                <option value="3">Trigram (3)</option>
+                <option value="4">Quadgram (4)</option>
+            </select>
+            <div style="flex-basis: 100%; height: 0;"></div>
+            <label for="swap-from-select">Swap From</label>
+            <select id="swap-from-select">
+            </select>
+            <label for="swap-to-select">Swap To</label>
+            <select id="swap-to-select">
+            </select>
+            <div style="flex-basis: 100%; height: 0;"></div>
+            <button id="swapButton">Swap</button>
+        </div>
+        <br>
+        <div>
+            <canvas id="frequency-chart"></canvas>
+        </div>
+        <div style="flex-basis: 100%; height: 0;"></div>
+        <div class="chart-sorting-container">
+            <button id="sort-alphabetically-button">Sort Alphabetically</button>
+            <button id="sort-descending-button">Sort Descending</button>
+        </div>
+    </div>
+    <dialog id="algorithm-info">
+        <div class="dialog-header">
+            <h2></h2>
+            <button onClick="PopupUtils.closePopupArticle()" class="close-x">&times;</button>
+        </div>
+        <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
+    </dialog>
+    <footer>
+        <p>© 2026 CipherLabs. All rights reserved.</p>
+    </footer>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module">
+    import { PopupUtils } from '../js/popup-utils.js'
+    import { Alphabets } from '../js/alphabets.js';
+    const ciphertextArea = document.getElementById("cipher-textarea");
+    const swapTextArea = document.getElementById("swap-textarea");
+    const swapLogTextArea = document.getElementById("swap-log-textarea");
+    const charCount = document.getElementById("charCount");
+    const ngramSelect = document.getElementById("ngram-select");
+    const ctx = document.getElementById("frequency-chart");
+    let chartInstance = null;
+    let sortAlphabetically = true;
+
+    function keepLettersOnly() {
+        var uppercaseLetters = ciphertextArea.value.toUpperCase();
+        ciphertextArea.value = uppercaseLetters.replace(/[^A-Z]/g, '');
+        updateChart(sortAlphabetically);
+
+    }
+    function getNgrams(text, n) {
+        const cleanedText = text.replaceAll(' ', '');
+        const frequencyCounts = {};
+        for (let i = 0; i <= cleanedText.length - n; i++) {
+            const ngram = cleanedText.slice(i, i + n);
+            frequencyCounts[ngram] = (frequencyCounts[ngram] || 0) + 1;
+        }
+
+        const mappedNgrams = Object.entries(frequencyCounts)
+            .map(([ngram, count]) => ({ ngram, count }));
+        return {
+            labels: mappedNgrams.map(item => item.ngram),
+            data: mappedNgrams.map(item => item.count)
+        };
+    }
+
+    function getNGramSelection() {
+        const n = parseInt(ngramSelect.value);
+        switch (n) {
+            case 1:
+                return "Unigram";
+                break;
+            case 2:
+                return "Bigram";
+                break;
+            case 3:
+                return "Trigram";
+                break;
+            case 4:
+                return "Quadgram";
+                break;
+        }
+    }
+
+    function applySwap() {
+        const fromChar = fromSelect.value;
+        const toChar = toSelect.value;
+        swapTextArea.value = swapTextArea.value.replaceAll(fromChar, toChar);
+        swapLogTextArea.value += fromChar + "-" + toChar + "\n";
+    }
+
+    function updateChart(sortInAlphabeticalOrder) {
+        const text = ciphertextArea.value;
+        const n = parseInt(ngramSelect.value);
+        let sortedData = [];
+        let { labels, data } = getNgrams(text, n);
+
+        if (sortInAlphabeticalOrder) {
+            sortedData = labels
+                .map((label, index) => ({
+                    label: label,
+                    value: data[index]
+                }))
+                .sort((a, b) => a.label.localeCompare(b.label, 'en'));
+            sortAlphabetically = true;
+        } else {
+            sortedData = labels
+                .map((label, index) => ({ label: label, value: data[index] }))
+                .sort((a, b) => b.value - a.value);
+            sortAlphabetically = false;
+        }
+
+        if (ctx.parentElement) {
+            ctx.parentElement.style.height = `${Math.max(300, labels.length * 25)}px`;
+        }
+        labels = sortedData.map(item => item.label);
+        data = sortedData.map(item => item.value);
+
+        if (chartInstance) {
+            chartInstance.data.labels = labels;
+            chartInstance.data.datasets[0].data = data;
+            chartInstance.data.datasets[0].label = `${getNGramSelection()} Frequency`;
+            chartInstance.options.plugins.title.text = [
+                `Frequency Analysis`,
+                `Fragment Amount = ${labels.length}`,
+                `n = ${ngramSelect.value}`
+            ];
+            chartInstance.update('none');
+        } else {
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: `${getNGramSelection()} Frequency`,
+                        data: data,
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    animation: false,
+                    hover: {
+                        animationDuration: 0
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'y',
+                        intersect: true
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: [
+                                `Frequency Analysis`,
+                                `Fragment Amount = ${labels.length}`,
+                                `n = ${ngramSelect.value}`
+                            ],
+
+                            font: {
+                                size: 16
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frequency / Count'
+                            },
+                            ticks: {
+                                stepSize: 1
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                autoSkip: false,
+                                padding: 5,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    let alphabet = Alphabets.ALPHABET + Alphabets.ALPHABET.toLowerCase() + Alphabets.DIGITS
+    alphabet = alphabet.split('');
+    const fromSelect = document.getElementById('swap-from-select');
+    const toSelect = document.getElementById('swap-to-select');
+
+    alphabet.forEach(char => {
+        fromSelect.add(new Option(char, char));
+        toSelect.add(new Option(char, char));
+    });
+    ngramSelect.addEventListener('change', () => { updateChart(sortAlphabetically) });
+    ciphertextArea.addEventListener('input', () => {
+        charCount.textContent = "Characters Typed: " + ciphertextArea.value.length;
+        swapTextArea.value = ciphertextArea.value;
+        updateChart(sortAlphabetically);
+    });
+    document.getElementById('swapButton').addEventListener('click', applySwap);
+    document.getElementById('sort-alphabetically-button').addEventListener('click', () => updateChart(true));
+    document.getElementById('sort-descending-button').addEventListener('click', () => updateChart(false));
+    charCount.textContent = "Characters Typed: " + ciphertextArea.value.length;
+    document.getElementById('readMoreButton').addEventListener('click', () => {
+        PopupUtils.openPopupArticle('../resources/articles/frequency-analysis-article.html', 'Information Behind Frequency Analysis');
+    });
+    updateChart(sortAlphabetically);
+</script>
+
+</html>

@@ -31,10 +31,10 @@ function decrypt(ciphertext, customAlphabet) {
     let shift = parseInt(keyTextbox.value);
     const outOfIndexPosition = -1;
     for (let i = 0; i < ciphertext.length; i++) {
-        const character = plaintext[i];
+        const character = ciphertext[i];
         const characterCurrentIndex = customAlphabet.indexOf(character);
         if (characterCurrentIndex !== outOfIndexPosition) {
-            plaintextResult += customAlphabet[(characterCurrentIndex - shift) % customAlphabet.length];
+            plaintextResult += customAlphabet[((characterCurrentIndex - shift) % customAlphabet.length + customAlphabet.length) % customAlphabet.length];
         } else {
             plaintextResult += character;
         }
@@ -79,7 +79,7 @@ keyTextbox.addEventListener('input', () => {
     } else {
         encryptOrDecrypt();
         updateSubstitutionTable();
-    
+
     }
 });
 
@@ -88,3 +88,4 @@ window.addEventListener('DOMContentLoaded', () => {
     updateAlphabetTextBox();
     updateSubstitutionTable();
 });
+

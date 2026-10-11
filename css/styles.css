@@ -112,6 +112,11 @@ footer p {
   width: fit-content;
 }
 
+.characters-typed {
+  text-align: center;
+  margin: 0 auto;
+}
+
 .lock-spot-controls h4 {
   text-align: center;
   width: 100%;
@@ -404,8 +409,8 @@ iframe.resource-frame {
   background-color: transparent;
 }
 
-.cipher-container label{
-    color: white;
+.cipher-container label {
+  color: white;
 }
 
 
@@ -430,6 +435,7 @@ iframe.resource-frame {
   border-radius: 8px;
   border: 1px solid black;
 }
+
 .cipher-options label {
   font-size: 13px;
   text-transform: uppercase;
@@ -455,6 +461,7 @@ iframe.resource-frame {
   border-color: #007bff;
 }
 
+.cryptanalysis-header,
 .cipher-header {
   display: block;
   text-align: center;
@@ -468,18 +475,21 @@ iframe.resource-frame {
   margin-right: 20px;
 }
 
+.cryptanalysis-header p,
 .cipher-header p {
   font-size: 12px;
   font-weight: normal;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.cryptanalysis-header button,
 .cipher-header button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
+.cryptanalysis-header h2,
 .cipher-header h2 {
   color: #34495e;
   font-size: 20px;
@@ -487,6 +497,7 @@ iframe.resource-frame {
   line-height: 2;
 }
 
+.cryptanalysis-header h2 img,
 .cipher-header h2 img {
   border: 4px solid #3498db;
   border-radius: 8px;
@@ -602,4 +613,134 @@ iframe.resource-frame {
   padding: 4px 0;
   font-size: 10px;
   overflow: hidden;
+}
+
+.frequency-analysis-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2px;
+    padding: 20px;
+    box-sizing: border-box;
+    min-height: 65vh;
+}
+
+.frequency-analysis-container label {
+    flex: 0 0 32%;
+    width: 32%;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #34495e;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.frequency-analysis-container .cipher-textarea,
+.frequency-analysis-container .swap-textarea,
+.frequency-analysis-container .swap-log-textarea {
+    flex: 0 0 32%;
+    gap: 3px;
+    width: 32%;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    resize: vertical;
+    height: 100px;
+    text-transform: none;
+    box-sizing: border-box;
+}
+
+.frequency-analysis-container > div:has(#frequency-chart) {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#frequency-chart {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.frequency-analysis-options {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c3e50;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.frequency-analysis-options label {
+  text-align: center;
+  color: white;
+}
+
+.frequency-analysis-options h4 {
+  text-align: center;
+  width: 100%;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.frequency-analysis-options #ngram-select {
+  background-color: #2c3e50;
+  color: white;
+  border-radius: 8px;
+  padding: 6px;
+  text-align: center;
+  border-color: white;
+}
+
+.frequency-analysis-container label {
+    width: 32%;
+    text-align: center;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #34495e;
+    color: white;
+    padding: 5px;
+}
+
+.chart-sorting-container {
+  display: flex;
+  margin: auto;
+  gap: 2px;
+}
+
+.frequency-analysis-options button,
+.chart-sorting-container button {
+  background-color: green;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  border: none;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 8px;
+}
+
+.frequency-analysis-options button {
+  width: 70%;
+  justify-content: center;
+}
+
+.frequency-analysis-options button:hover,
+.chart-sorting-container button:hover {
+  cursor: pointer;
+
+}
+
+.chart-sorting-container button:hover {
+  background-color: #2c3e50;
 }

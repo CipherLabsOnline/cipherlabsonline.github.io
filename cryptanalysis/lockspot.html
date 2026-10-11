@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lock Spot</title>
+    <link rel="stylesheet" href="../css/styles.css" type="text/css">
+
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="workstation.html">Work Station</a>
+        <a href=""><img
+                src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+        <a href="./lockspot.html">Lock Spot</a>
+        <a href="resources.html">Resources</a>
+    </nav>
+    <div class="lock-spot-container">
+        <div class="inline-header">
+            <h2>&#9432; Lock Spot</h2>
+            <p> Thanks to the power of machine learning, Lock Spot can identify the cipher type, and cipher algorithm
+                from a given snippet of ciphertext.</p>
+        </div>
+        <br>
+        <textarea class="lock-spot-textarea" id="lock-spot-textarea"
+            placeholder="Type your ciphertext here!"></textarea>
+        <div class="characters-typed">
+            <span id="charCount">Characters Typed: 0</span>
+        </div>
+        <br>
+        <div class="lock-spot-controls">
+            <h4>&#9881; Lock Spot Settings</h2>
+                <select class="model-selector" id="model-selector">
+                    <option value="small_ffn_model">Lock Spot Small FFN Model</option>
+                    <option value="small_lr_model">Lock Spot Small LR Model</option>
+                </select>
+                <button class="save-model-btn" onclick="loadModel();">Select Model</button>
+                <button class="conduct-analysis-btn" onclick="analyzeCiphertext();">Conduct Analysis</button>
+        </div>
+        <br>
+        <div class="ciphertextbox-warning-label">
+            <span>Ciphertext must be 100+ characters in length and contain only digits and uppercase letters; any other
+                symbols will be removed during analysis.</span>
+        </div>
+    </div>
+    <div class="results-box" id="resultsBox">
+
+    </div>
+    <footer>
+        <p>© 2026 CipherLabs. All rights reserved.</p>
+    </footer>
+    <script type="module">
+        import { LockSpotManager } from '../js/lockspot/lock-spot-manager.js';
+        import { LockSpotFFNModelData } from '../js/lockspot/lock-spot-ffn-model-data.js';
+        import { LockSpotLogisticRegressionModelData } from '../js/lockspot/lock-spot-logistic-regression-model-data.js';
+        import { LockSpotFeatureUtils } from '../js/lockspot/lock-spot-feature-utils.js';
+
+        let selectedModel = null;
+        let modelLoading = false;
+
+
+        async function loadModel() {
+            const dropdown = document.getElementById("model-selector");
+            const selectedValue = dropdown.value;
+
+            try {
+                selectedModel = null;
+
+                if (selectedValue === "small_ffn_model") {
+                    selectedModel = await LockSpotManager.loadModelArchitecture(
+                        "../models/lock-spot-small-ffn-model.json",
+                        new LockSpotFFNModelData()
+                    );
+                    alert("You've successfully selected LockSpot's Feed Forward Network model")
+                } else if (selectedValue === "small_lr_model") {
+                    selectedModel = await LockSpotManager.loadModelArchitecture(
+                        "../models/lock-spot-small-logistic-regression-model.json",
+                        new LockSpotLogisticRegressionModelData()
+                    );
+                    alert("You've successfully selected LockSpot's Logistic Regression Model!")
+                } else {
+                    throw new Error("No valid model selected");
+                }
+            } catch (error) {
+                alert("Could not load the selected model.");
+                selectedModel = null;
+            }
+        }
+
+
+        window.loadModel = loadModel;
+
+        async function analyzeCiphertext() {
+            if (modelLoading) {
+                alert("The model is still loading. Please try again shortly.");
+                return;
+            }
+
+            if (!selectedModel) {
+                alert("Please select and load a model first!");
+                return;
+            }
+
+            const textarea = document.getElementById("lock-spot-textarea");
+            let text = textarea?.value ?? "";
+
+            if (text.length < 100) {
+                alert("Ciphertext must be 100 characters or more");
+                return;
+            }
+
+            text = text.replaceAll(/[^a-zA-Z0-9]/g, "");
+            textArea.value = text;
+            try {
+                const features = LockSpotFeatureUtils.getFeatures(text);
+
+                const resultsBox = document.getElementById("resultsBox");
+                resultsBox?.replaceChildren();
+
+                LockSpotManager.generateReport(
+                    "Cipher Type",
+                    selectedModel.cipherTypeModel,
+                    features
+                );
+
+                LockSpotManager.generateReport(
+                    "Cipher Algorithm",
+                    selectedModel.cipherAlgorithmModel,
+                    features
+                );
+            } catch (error) {
+                alert("Could not run the selected model.");
+            }
+        }
+
+        window.analyzeCiphertext = analyzeCiphertext;
+
+        const textArea = document.getElementById("lock-spot-textarea");
+        const charCount = document.getElementById("charCount");
+        textArea.addEventListener('input', () => {
+            charCount.textContent = "Characters Typed: " + textArea.value.length;
+        });
+    </script>
+</body>
+
+</html>

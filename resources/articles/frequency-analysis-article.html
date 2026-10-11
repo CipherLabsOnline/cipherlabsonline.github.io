@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Details Behind Frequency Analysis</title>
+    <link rel="stylesheet" type="text/css" href="./css/resource-styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Details Behind Frequency Analysis</h1>
+    </header>
+
+    <div class="article-content">
+        <h2>Introduction to Frequency Analysis</h2>
+        <p>
+            Frequency analysis is a cryptanalysis method used to study the frequency distribution or count of
+            letters/digits or groups of letters/digits in a given ciphertext. Frequency analysis
+            can be used as an aid in cracking ciphertexts using classic cipher encryptions. You may be wondering, how is
+            a method like this possible? Well, for every language, differing for the most part,
+            individual or grouped letters appear more frequently than others. The letter "E" appears
+            most frequently (about 12.7% of the time), while the letters "X," "J", "Q", and "Z" appear less frequently
+            in the
+            English alphabet. Other common letters that appear frequently in the English alphabet, are "T", "A", and
+            "O". Substitution ciphers (like Caesar, Vigenère) encrypt text by replacing
+            original letters with different letters. Despite the change or shift in letters, the frequency of each
+            letter remains equivalent in the ciphertext. By keeping track of how often specific letters
+            show up in the encrypted text, it can be easy to spot clues and patterns, and decipher the message from
+            there. Please refer to the letter frequency chart below, as this will give you an idea of how often or
+            number of times each letter frequently appears in the English language.
+        </p>
+        <img
+            src="https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/English_letter_frequency_%28alphabetic%29.svg/500px-English_letter_frequency_%28alphabetic%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail">
+        <center>
+            <caption>Letter Frequency Chart</caption>
+        </center>
+        <p>
+            Remember, too, frequency analysis doesn't have to rely only on individual characters. Frequency analysis can
+            resort to analyzing grouped letters/symbols, such as bigrams(combination of 2 letters), trigrams
+            (combination of three letters), and so on - collectively known as n-grams.
+        </p>
+        <h2>Example: Breaking a Caesar Cipher Using Frequency Analysis</h2>
+        <p>
+            <strong>Scenario:</strong> Bob came across a ciphertext that reads "WKH SDVVZRUG LV VHYHQ GRQW WHOO DQBRQH",
+            and it is known to be encrypted using a simple substitution cipher.
+            Bob decides to use
+            frequency analysis to try and crack the ciphertext.
+            The following steps he decides to follow are:
+        </p>
+        <ul>
+            <li>Count the frequency of each letter: H(5), V(4), Q(4), W(3), R(3), D(2), G(2), O(2), K(1), S(1), Z(1),
+                U(1), L(1), Y(1), B(1)</li>
+            <li>From there he compares with known frequency distribution in English
+            </li>
+        </ul>
+        <p>
+            Since "E" is the most frequent letter in the English alphabet, and "H" is the most frequent letter
+            in the ciphertext, let's assume H corresponds to "E". From "H" to "E" (counting backwards), it is 3
+            positions
+            back. Just note that this method won’t always work. Guessing and comparing with other common, frequent
+            letters in the English alphabet might be necessary.
+            Going back to our example, for every letter, we can substitute with a "-3" in the alphabet. Counting down 3
+            in the alphabet,
+            following this pattern,
+            "V" becomes "S", "Q" becomes "N", "W" becomes "T", "R" becomes "O", "D" becomes "A", "G" becomes "D", "O"
+            becomes "L", and so on. If Bob keeps
+            following the same procedure,
+            Bob will figure out that the message was encrypted using the Caesar cipher with a shift of 3, and that the
+            plaintext message was "THE PASSWORD IS SEVEN DONT TELL ANYONE". Below is a table of what each ciphertext
+            letter corresponds to when shifted 3 positions back.
+        </p>
+        <table align="center" border="1" style="text-align: center;">
+            <tr>
+                <th>From Letter</th>
+                <th>To Letter 3 Positions Back</th>
+            </tr>
+            <tr>
+                <td>H</td>
+                <td>E</td>
+            </tr>
+            <tr>
+                <td>V</td>
+                <td>S</td>
+            </tr>
+            <tr>
+                <td>Q</td>
+                <td>N</td>
+            </tr>
+            <tr>
+                <td>W</td>
+                <td>T</td>
+            </tr>
+            <tr>
+                <td>R</td>
+                <td>O</td>
+            </tr>
+            <tr>
+                <td>D</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>G</td>
+                <td>D</td>
+            </tr>
+            <tr>
+                <td>O</td>
+                <td>L</td>
+            </tr>
+            <tr>
+                <td>K</td>
+                <td>H</td>
+            </tr>
+            <tr>
+                <td>S</td>
+                <td>P</td>
+            </tr>
+            <tr>
+                <td>Z</td>
+                <td>W</td>
+            </tr>
+            <tr>
+                <td>U</td>
+                <td>R</td>
+            </tr>
+            <tr>
+                <td>L</td>
+                <td>I</td>
+            </tr>
+            <tr>
+                <td>Y</td>
+                <td>V</td>
+            </tr>
+            <tr>
+                <td>B</td>
+                <td>Y</td>
+            </tr>
+        </table>
+        <h2>When is Frequency Analysis Useless?</h2>
+        <p>
+            Frequency analysis is effective when plaintext is encrypted using a simple substitution
+            cipher and when the ciphertext is long enough. However, the method becomes ineffective when plaintext is encrypted
+            using modern cryptographic algorithms, when the ciphertext is too short, and when multiple letters or
+            characters are substituted at once.
+        </p>
+        <h2>Sources</h2>
+        <ul style="list-style-type: none; padding-left: 0;">
+
+            <li style="margin-bottom: 15px; padding-left: 2em; text-indent: -2em; ">
+                eVersity Cryptography (2017, Feb. 17). <i>Frequency Cryptography</i>
+                [Video].
+                YouTube. https://www.youtube.com/watch?v=UQMLzhff8gw
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 2em; text-indent: -2em; ">
+                <i>Frequency Analysis</i> (2026, September 2). In Wikipedia.
+                https://en.wikipedia.org/wiki/Frequency_analysis
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
