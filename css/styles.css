@@ -738,11 +738,82 @@ iframe.resource-frame {
   text-align: center;
 }
 
-.home-container .welcome-container p {
+.home-container .welcome-container .changing-phrase {
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 24px;
   text-align: center;
+  font-weight: bold;
+}
+
+.home-container .welcome-container .changing-phrase::after {
+  content: "Dive Into The World Of Cryptography";
+  color: white;
+  animation: phraseChange 12s steps(1) infinite,
+    fadeEffect 12s ease-in-out infinite;
+}
+
+@keyframes phraseChange {
+
+  0%,
+  33% {
+    content: "Dive Into The World Of Cryptography";
+    color: beige;
+  }
+
+  34%,
+  66% {
+    content: "Progress And Advance Your Skills In Cryptography";
+    color: wheat;
+  }
+
+  67%,
+  100% {
+    content: "Become An Expert And Teach Cryptography";
+    color: lightgrey;
+  }
+}
+
+@keyframes fadeEffect {
+  0% {
+    opacity: 0;
+  }
+
+  3% {
+    opacity: 1;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  33.33% {
+    opacity: 0;
+  }
+
+  36.33% {
+    opacity: 1;
+  }
+
+  63.33% {
+    opacity: 1;
+  }
+
+  66.66% {
+    opacity: 0;
+  }
+
+  69.66% {
+    opacity: 1;
+  }
+
+  97% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .home-container .welcome-container span {
@@ -773,12 +844,19 @@ iframe.resource-frame {
 }
 
 .cards-container .column .card img {
-    display: block;
-    width: 400px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
-    overflow: hidden;
+  display: block;
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+@media (hover: hover) {
+  .cards-container .column .card img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
 }
 
 
@@ -849,11 +927,11 @@ iframe.resource-frame {
   gap: 10px;
 }
 
-.cards-container .column .card .card-text .card-button-group > button {
-    display: block !important;
-    flex: 1 1 0 !important;
-    width: 0 !important;
-    min-width: 0;
-    margin: 0 !important;
-    box-sizing: border-box;
+.cards-container .column .card .card-text .card-button-group>button {
+  display: block !important;
+  flex: 1 1 0 !important;
+  width: 0 !important;
+  min-width: 0;
+  margin: 0 !important;
+  box-sizing: border-box;
 }
