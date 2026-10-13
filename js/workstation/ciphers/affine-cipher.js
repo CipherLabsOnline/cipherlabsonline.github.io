@@ -154,10 +154,16 @@ AlphabetSelector.alphabetTextbox.addEventListener('input', (e) => {
     validateKeyA(alphabetLength)
 });
 
+//Let users type freely without disrupting instantly
+let delayedTimer;
 
 keyTextboxArray.forEach(keyTextbox => {
     keyTextbox.addEventListener('input', (e) => {
-       validateKeyTextboxes(e);
+        clearTimeout(delayedTimer);
+        delayedTimer = setTimeout(() => {
+            validateKeyTextboxes(e);
+        }, 1000);
+       
     });
     keyTextbox.addEventListener('paste', (e) => {
        validateKeyTextboxes(e);
