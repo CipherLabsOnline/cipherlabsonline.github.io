@@ -80,10 +80,6 @@ function initUpdate() {
     updateRailFenceVisual();
 }
 
-function stoperror() {
-   return true;
-}
-
 plaintextTextArea.addEventListener('input', () => {
     isPlaintextTextAreaBeingUsed = true;
     initUpdate();
