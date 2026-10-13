@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rail Fence Cipher</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../workstation.html">Work Station</a>
+        <a href=""><img
+                src="https://raw.githubusercontent.com/dug22/Cipher-Labs/master/cipher-labs-ui/src/main/resources/images/cipher-labs-desktop-icon.png"></a>
+        <a href="../cryptanalysis/lockspot.html">Lock Spot</a>
+        <a href="../resources.html">Resources</a>
+    </nav>
+    <br>
+    <div class="cipher-header">
+        <h2><img src="../imgs/rail-fence.png" width="32px" height="32px">Rail Fence Cipher
+            <button title="Read More" type="submit"
+                onclick="PopupUtils.openPopupArticle('../resources/articles/rail-fence-cipher-article.html', 'Information Behind The Rail Fence Cipher')"
+                ;>
+                📜
+            </button>
+        </h2>
+        <p>A classical transposition cipher, that rearranges a message's letters into a zigzag pattern across multiple
+            rows.</p>
+    </div>
+
+    <div class="cipher-container">
+        <div class="plaintext-container">
+            <label for="plaintext">Plaintext</label>
+            <textarea id="plaintextTextArea" class="plaintext-textarea"
+                placeholder="Type your plain text here">CANYOUGUESSWHATTHISSECRETMESSAGEREADS</textarea>
+        </div>
+        <div class="ciphertext-container">
+            <label for="ciphertext">Ciphertext</label>
+            <textarea id="ciphertextTextArea" class="ciphertext-textarea"
+                placeholder="Type your ciphertext here"></textarea>
+        </div>
+    </div>
+
+    <aside class="cipher-options">
+        <div class="options-content">
+            <br>
+            <label><strong>Options</strong></label>
+            <div class="options-row-textbox-group">
+                <label>Key Selections</label>
+                <label>Rails (Min: 2 | Max: 10)</label>
+                <input type="number" id="rails-key-textbox" value="5" min="2" max="10" onkeydown="return false">
+                <label>Offset (Min: 0 | Max: 4)</label>
+                <input type="number" id="offset-key-textbox" value="0" min="0" max="4" onkeydown="return false">
+                <label>Rail Fence Visual</label>
+                <pre id="rail-fence-visual"></pre>
+            </div>
+        </div>
+
+    </aside>
+
+    <dialog id="algorithm-info">
+        <div class="dialog-header">
+            <h2></h2>
+            <button onClick="PopupUtils.closePopupArticle()" class="close-x">&times;</button>
+        </div>
+        <iframe id="algorithmIframe" class="algorithm-iframe"></iframe>
+    </dialog>
+    <script src="../js/popup-utils.js" type="module"></script>
+    <script src="../js/workstation/ciphers/rail-fence-cipher.js" type="module"></script>
+    <br>
+    <footer>
+        <p>© 2026 CipherLabs. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

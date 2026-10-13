@@ -12,7 +12,9 @@ function getAlphabetTextboxValue() {
 
 function encryptOrDecrypt() {
     const alphabet = getAlphabetTextboxValue();
-    return isPlaintextTextAreaBeingUsed ? ciphertextTextArea.value = encrypt(plaintextTextArea.value, alphabet) : plaintextTextArea.value = decrypt(ciphertextTextArea.value, alphabet);
+    return isPlaintextTextAreaBeingUsed ? 
+    ciphertextTextArea.value = encrypt(plaintextTextArea.value, alphabet) : 
+    plaintextTextArea.value = decrypt(ciphertextTextArea.value, alphabet);
 }
 
 function encrypt(plaintext, customAlphabet) {

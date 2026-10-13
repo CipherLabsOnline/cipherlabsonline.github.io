@@ -157,7 +157,15 @@ AlphabetSelector.alphabetTextbox.addEventListener('input', (e) => {
 
 keyTextboxArray.forEach(keyTextbox => {
     keyTextbox.addEventListener('input', (e) => {
-        if (keyATextbox.value == '' || keyBTextbox.value == '') {
+       validateKeyTextboxes(e);
+    });
+    keyTextbox.addEventListener('paste', (e) => {
+       validateKeyTextboxes(e);
+    });
+});
+
+function validateKeyTextboxes(e){
+     if (keyATextbox.value == '' || keyBTextbox.value == '') {
             return;
         }
 
@@ -181,5 +189,4 @@ keyTextboxArray.forEach(keyTextbox => {
         lastValidKeyA = keyATextbox.value;
         encryptOrDecrypt();
         updateSubstitutionTable();
-    });
-});
+}
