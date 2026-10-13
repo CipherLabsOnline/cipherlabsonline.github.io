@@ -77,11 +77,7 @@ function updateRailFenceVisual() {
 
 function initUpdate() {
     encryptOrDecrypt();
-    try {
-        updateRailFenceVisual();
-    } catch (e) {
-        window.onerror = stoperror;
-    }
+    updateRailFenceVisual();
 }
 
 function stoperror() {
