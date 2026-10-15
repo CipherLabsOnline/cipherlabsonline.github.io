@@ -504,7 +504,7 @@ iframe.resource-frame {
 .cipher-options .options-content #encoding-table th,
 .cipher-options .options-content #encoding-table td {
   text-align: center;
-  color: #34495e;
+  color: white;
   border: 1px solid #dcdfe3;
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
@@ -526,6 +526,12 @@ iframe.resource-frame {
   width: 80%;
   margin-left: 10%;
   border-radius: 8px;
+  background-color: #2c3e50;
+
+}
+
+.cipher-options .options-content label {
+  color: white;
 }
 
 .cipher-options .options-content .options-row-textbox-group {
@@ -533,12 +539,21 @@ iframe.resource-frame {
   align-items: center;
   gap: 0.5rem;
   width: 90%;
+
 }
 
+.cipher-options .options-content .options-row-textbox-group label {
+  color: white;
+}
+
+.cipher-options .options-content .options-row-textbox-group input[type="number"],
 .cipher-options .options-content .options-row-textbox-group input[type="text"] {
   flex: 1 1 auto;
   padding: 8px;
   box-sizing: border-box;
+  background-color: #2c3e50;
+  border: 2px solid white;
+  color: white;
 }
 
 
@@ -581,6 +596,7 @@ iframe.resource-frame {
   table-layout: fixed;
   box-sizing: border-box;
   margin-bottom: 6px;
+  margin-top: 8px;
   margin-left: 6px;
   margin-right: 6px;
 }
@@ -591,6 +607,7 @@ iframe.resource-frame {
   padding: 4px 0;
   font-size: 10px;
   overflow: hidden;
+  color: white;
 }
 
 .frequency-analysis-container {
@@ -946,6 +963,7 @@ iframe.resource-frame {
   box-sizing: border-box;
   min-width: 100%;
   color: white;
+  border: 1px solid white;
   background-color: #2c3e50;
   border-radius: 4px;
   padding: 5px;

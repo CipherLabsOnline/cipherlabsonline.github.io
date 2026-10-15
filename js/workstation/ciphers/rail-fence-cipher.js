@@ -1,5 +1,5 @@
-const railsKeyTextbox = document.getElementById("rails-key-textbox");
-const offsetKeyTextbox = document.getElementById("offset-key-textbox");
+const railsKeySelection = document.getElementById("rails-key-selection");
+const offsetKeySelection = document.getElementById("offset-key-selection");
 const plaintextTextArea = document.getElementById("plaintextTextArea");
 const ciphertextTextArea = document.getElementById("ciphertextTextArea");
 const railFenceVisual = document.getElementById("rail-fence-visual");
@@ -7,8 +7,8 @@ let isPlaintextTextAreaBeingUsed = true;
 let rowLettersCaptured = [];
 
 function encryptOrDecryptText(text, encrypt) {
-    const rails = parseInt(railsKeyTextbox.value);
-    const offset = parseInt(offsetKeyTextbox.value);
+    const rails = parseInt(railsKeySelection.value);
+    const offset = parseInt(offsetKeySelection.value);
     const cycle = rails * 2 - 2;
     let x, y;
     if (encrypt) {
@@ -71,7 +71,7 @@ function visualizeRailFence(text, rails, offset) {
 }
 
 function updateRailFenceVisual() {
-    return railFenceVisual.textContent = visualizeRailFence(plaintextTextArea.value, parseInt(railsKeyTextbox.value), parseInt(offsetKeyTextbox.value)) +
+    return railFenceVisual.textContent = visualizeRailFence(plaintextTextArea.value, parseInt(railsKeySelection.value), parseInt(offsetKeySelection.value)) +
         '\nCiphertext: ' + rowLettersCaptured.join(' ');
 }
 
@@ -90,21 +90,14 @@ ciphertextTextArea.addEventListener('input', () => {
     initUpdate();
 });
 
-railsKeyTextbox.addEventListener('change', () => {
+railsKeySelection.addEventListener('change', (event) => {
     initUpdate();
 });
 
-railsKeyTextbox.addEventListener('paste', (e) => {
-    e.preventDefault();
-});
-
-offsetKeyTextbox.addEventListener('change', () => {
+offsetKeySelection.addEventListener('change', (event) => {
     initUpdate();
 });
 
-offsetKeyTextbox.addEventListener('paste', (e) => {
-    e.preventDefault();
-});
 
 
 window.addEventListener('DOMContentLoaded', () => {
