@@ -546,6 +546,7 @@ iframe.resource-frame {
   color: white;
 }
 
+
 .cipher-options .options-content .options-row-textbox-group input[type="number"],
 .cipher-options .options-content .options-row-textbox-group input[type="text"] {
   flex: 1 1 auto;
@@ -967,4 +968,64 @@ iframe.resource-frame {
   background-color: #2c3e50;
   border-radius: 4px;
   padding: 5px;
+}
+
+.polybius-square-options {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  width: 100%;
+  padding: 4px;
+  gap: 12px; 
+  margin-bottom: 5px;
+}
+#grid-size{
+  text-align: center;
+  padding: 5px;
+}
+
+#coordinate-order {
+  text-align: center;
+}
+
+#polybius-grid {
+  display: grid;
+  grid-template-columns: 40px repeat(var(--cols, 5), 1fr);
+  grid-template-rows: 40px repeat(var(--rows, 5), 1fr);
+  gap: 2px;
+  margin-top: 15px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2c3e50;
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 2px;
+  min-height: 45px;
+  color: white;
+}
+
+.grid-cell.header-label {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  font-size: 0.9rem;
+}
+
+.grid-cell.corner-cell {
+  background: transparent;
+  border: none;
+}
+
+.grid-cell.placeholder-cell {
+  color: #bdc3c7;
+  background: #fafafa;
+  border-style: dashed;
 }
