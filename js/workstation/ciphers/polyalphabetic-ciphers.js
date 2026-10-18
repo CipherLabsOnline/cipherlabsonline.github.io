@@ -1,3 +1,8 @@
+/**
+ * Credit for this implementation of Vigenere and Porta goes to CryptoolOnline  
+ * Ported from Python to JavaScript
+ */
+
 import { AlphabetSelector } from "../alphabet-selector.js"
 
 function vigenere(message, key, alphabet, operation) {
