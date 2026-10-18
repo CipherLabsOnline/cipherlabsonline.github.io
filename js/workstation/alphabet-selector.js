@@ -76,7 +76,7 @@ export class AlphabetSelector {
         updateTableCallback();
     }
 
-    static onCustomCheckBoxEvent(encryptOrDecryptCallback, updateTableCallback = () => { }) {
+    static onCustomCheckBoxEvent(encryptOrDecryptCallback, updateTableCallback) {
         AlphabetSelector.alphabetTextbox.addEventListener('input', () => {
             if (AlphabetSelector.customCheckbox.checked) {
                 encryptOrDecryptCallback();
@@ -85,7 +85,7 @@ export class AlphabetSelector {
         });
     }
 
-    static onCheckboxChangeEvent(encryptOrDecryptCallback, updateTableCallback = () => { }, updateAlphabetTextBoxCallback) {
+    static onCheckboxChangeEvent(encryptOrDecryptCallback, updateTableCallback, updateAlphabetTextboxCallback) {
         const { customCheckbox, alphabetTextbox, checkboxArray } = AlphabetSelector;
         checkboxArray.forEach(checkbox => checkbox?.addEventListener('change', () => {
             //Prevents an empty checkbox selection catastophe
@@ -96,7 +96,7 @@ export class AlphabetSelector {
             if (checkbox.checked && customCheckbox) {
                 customCheckbox.checked = false;
             }
-            updateAlphabetTextBoxCallback();
+            updateAlphabetTextboxCallback();
             updateTableCallback();
         }));
         customCheckbox.addEventListener('change', () => {
@@ -115,7 +115,7 @@ export class AlphabetSelector {
                 encryptOrDecryptCallback();
             } else {
                 checkboxArray[0].checked = true;
-                updateAlphabetTextBoxCallback();
+                updateAlphabetTextboxCallback();
             }
         });
     }
